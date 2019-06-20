@@ -28,33 +28,63 @@ namespace API.Controllers
         }
 
         // GET: api/LeaveRequests
-        public List<LeaveRequest> GetLeaveRequests()
+        public HttpResponseMessage GetLeaveRequests()
         {
-            return iLeaveRequestService.Get();
+            var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+            var result = iLeaveRequestService.Get();
+            if (result != null)
+            {
+                message = Request.CreateResponse(HttpStatusCode.OK, result);
+            }
+            return message;
         }
 
         // GET: api/LeaveRequests/5
-        public LeaveRequest GetLeaveRequest(int id)
+        public HttpResponseMessage GetLeaveRequest(int id)
         {
-            return iLeaveRequestService.Get(id);
+            var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+            var result = iLeaveRequestService.Get(id);
+            if (result != null)
+            {
+                message = Request.CreateResponse(HttpStatusCode.OK, result);
+            }
+            return message;
         }
 
         // PUT: api/LeaveRequests/5
-        public void PutLeaveRequest(int id, LeaveRequestVM leaveRequestVM)
+        public HttpResponseMessage PutLeaveRequest(int id,LeaveRequestVM leaveRequestVM)
         {
-            iLeaveRequestService.Update(id, leaveRequestVM);
+            var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+            var result = iLeaveRequestService.Update(id,leaveRequestVM);
+            if (result)
+            {
+                message = Request.CreateResponse(HttpStatusCode.OK, "Data Dihapus");
+            }
+            return message;
         }
 
         // POST: api/LeaveRequests
-        public void InsertLeaveRequest(LeaveRequestVM leaveRequestVM)
+        public HttpResponseMessage InsertLeaveRequest(LeaveRequestVM leaveRequestVM)
         {
-            iLeaveRequestService.Insert(leaveRequestVM);
+            var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+            var result = iLeaveRequestService.Insert(leaveRequestVM);
+            if (result)
+            {
+                message = Request.CreateResponse(HttpStatusCode.OK, "Data Dihapus");
+            }
+            return message;
         }
 
         // DELETE: api/LeaveRequests/5
-        public void DeleteLeaveRequest(int id)
+        public HttpResponseMessage DeleteLeaveRequest(int id)
         {
-            iLeaveRequestService.Delete(id);
+            var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+            var result = iLeaveRequestService.Delete(id);
+            if (result)
+            {
+                message = Request.CreateResponse(HttpStatusCode.OK, "Data Dihapus");
+            }
+            return message;
         }
     }
 }

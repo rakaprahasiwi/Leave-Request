@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -370,6 +371,10 @@
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{769137F0-8A2D-4467-A81C-09B278DB72BE}</Project>
       <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{88EE556F-C6FF-4BB3-ACC9-6ACFA18A5E57}</Project>
+      <Name>Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">
       <Project>{239ec341-d894-4e2b-9cb7-ce61bcdd995e}</Project>

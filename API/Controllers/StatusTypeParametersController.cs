@@ -28,34 +28,63 @@ namespace API.Controllers
         }
 
         // GET: api/StatusTypeParameters
-        public List<StatusTypeParameter> GetStatusTypeParameters()
+        public HttpResponseMessage GetStatusTypeParameters()
         {
-            return iStatusTypeParameterService.Get();
+            var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+            var result = iStatusTypeParameterService.Get();
+            if (result != null)
+            {
+                message = Request.CreateResponse(HttpStatusCode.OK, result);
+            }
+            return message;
         }
 
         // GET: api/StatusTypeParameters/5
-        public StatusTypeParameter GetStatusTypeParameter(int id)
+        public HttpResponseMessage GetStatusTypeParameter(int id)
         {
-            return iStatusTypeParameterService.Get(id);
+            var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+            var result = iStatusTypeParameterService.Get(id);
+            if (result != null)
+            {
+                message = Request.CreateResponse(HttpStatusCode.OK, result);
+            }
+            return message;
         }
 
         // PUT: api/StatusTypeParameters/5
-        public void PutStatusTypeParameter(int id, StatusTypeParameterVM statusTypeParameterVM)
+        public HttpResponseMessage PutStatusTypeParameter(int id, StatusTypeParameterVM statusTypeParameterVM)
         {
-            iStatusTypeParameterService.Update(id, statusTypeParameterVM);
+            var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+            var result = iStatusTypeParameterService.Update(id, statusTypeParameterVM);
+            if (result)
+            {
+                message = Request.CreateResponse(HttpStatusCode.OK, statusTypeParameterVM);
+            }
+            return message;
         }
 
-
         // POST: api/StatusTypeParameters
-        public void InsertStatusTypeParameter(StatusTypeParameterVM statusTypeParameterVM)
+        public HttpResponseMessage InsertStatusTypeParameter(StatusTypeParameterVM statusTypeParameterVM)
         {
-            iStatusTypeParameterService.Insert(statusTypeParameterVM);
+            var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+            var result = iStatusTypeParameterService.Insert(statusTypeParameterVM);
+            if (result)
+            {
+                message = Request.CreateResponse(HttpStatusCode.OK, statusTypeParameterVM);
+            }
+            return message;
         }
 
         // DELETE: api/StatusTypeParameters/5
-        public void DeleteStatusTypeParameter(int id)
+        public HttpResponseMessage DeleteStatusTypeParameter(int id)
         {
-            iStatusTypeParameterService.Delete(id);
+            var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+            var result = iStatusTypeParameterService.Delete(id);
+            if (result)
+            {
+                message = Request.CreateResponse(HttpStatusCode.OK, "Data Dihapus");
+            }
+            return message;
         }
     }
 }
