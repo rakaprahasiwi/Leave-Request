@@ -44,12 +44,17 @@ namespace API.Controllers
         {
             iStatusTypeParameterService.Update(id, statusTypeParameterVM);
         }
-
-
+        
         // POST: api/StatusTypeParameters
-        public void InsertStatusTypeParameter(StatusTypeParameterVM statusTypeParameterVM)
+        public HttpResponseMessage InsertStatusTypeParameter(StatusTypeParameterVM statusTypeParameterVM)
         {
-            iStatusTypeParameterService.Insert(statusTypeParameterVM);
+            var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+            var result = iStatusTypeParameterService.Insert(statusTypeParameterVM);
+            if (result)
+            {
+                message = Request.CreateResponse(HttpStatusCode.OK, statusTypeParameterVM);
+            }
+            return message;
         }
 
         // DELETE: api/StatusTypeParameters/5
