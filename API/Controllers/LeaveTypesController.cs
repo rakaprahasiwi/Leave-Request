@@ -38,7 +38,10 @@ namespace API.Controllers
         }
 
         // PUT: api/LeaveTypes/5
-
+        public void PutLeaveType(int id, LeaveTypesVM leaveTypesVM)
+        {
+            iLeaveTypesService.Update(id, leaveTypesVM);
+        }
 
         // POST: api/LeaveTypes
         public void InsertLeaveType(LeaveTypesVM leaveTypesVM)
@@ -47,5 +50,9 @@ namespace API.Controllers
         }
 
         // DELETE: api/LeaveTypes/5
+        public void DeleteLeaveType(int id)
+        {
+            iLeaveTypesService.Delete(id);
+        }
     }
 }

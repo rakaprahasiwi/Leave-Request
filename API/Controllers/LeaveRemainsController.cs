@@ -40,7 +40,10 @@ namespace API.Controllers
         }
 
         // PUT: api/LeaveRemains/5
-
+        public void PutLeaveRemain(int id, LeaveRemainVM leaveRemainVM)
+        {
+            iLeaveRemainService.Update(id, leaveRemainVM);
+        }
 
         // POST: api/LeaveRemains
         public void InsertLeaveRemain(LeaveRemainVM leaveRemainVM)
@@ -50,5 +53,9 @@ namespace API.Controllers
 
 
         // DELETE: api/LeaveRemains/5
+        public void DeleteLeaveRemain(int id)
+        {
+            iLeaveRemainService.Delete(id);
+        }
     }
 }

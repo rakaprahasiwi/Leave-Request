@@ -23,9 +23,8 @@ namespace DataAccess.Models
             this.CreateDate = DateTimeOffset.Now.ToLocalTime();
         }
 
-        public void Update(int id, LeaveTypesVM leaveTypesVM)
+        public void Update(LeaveTypesVM leaveTypesVM)
         {
-            this.Id = id;
             this.Name = leaveTypesVM.Name;
             this.Value = leaveTypesVM.Value;
             this.UpdateDate = DateTimeOffset.Now.ToLocalTime();

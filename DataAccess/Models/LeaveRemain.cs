@@ -28,9 +28,8 @@ namespace DataAccess.Models
             this.CreateDate = DateTimeOffset.Now.ToLocalTime();
         }
 
-        public void Update(int id, LeaveRemainVM leaveRemainVM)
+        public void Update(LeaveRemainVM leaveRemainVM)
         {
-            this.Id = id;
             this.Duration = leaveRemainVM.Duration;
             this.Employee_Id = leaveRemainVM.Employee_Id;
             this.UpdateDate = DateTimeOffset.Now.ToLocalTime();

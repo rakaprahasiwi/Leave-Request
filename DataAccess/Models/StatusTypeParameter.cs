@@ -21,9 +21,8 @@ namespace DataAccess.Models
             this.CreateDate = DateTimeOffset.Now.ToLocalTime();
         }
 
-        public void Update(int id, StatusTypeParameterVM statusTypeParameterVM)
+        public void Update(StatusTypeParameterVM statusTypeParameterVM)
         {
-            this.Id = id;
             this.Name = statusTypeParameterVM.Name;
             this.UpdateDate = DateTimeOffset.Now.ToLocalTime();
         }

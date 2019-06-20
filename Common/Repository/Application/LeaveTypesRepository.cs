@@ -68,7 +68,7 @@ namespace Common.Repository.Application
             var get = Get(id);
             if (get != null)
             {
-                get.Update(id, leaveTypesVM);
+                get.Update(leaveTypesVM);
                 myContext.Entry(get).State = EntityState.Modified;
                 var result = myContext.SaveChanges();
                 return result > 0;

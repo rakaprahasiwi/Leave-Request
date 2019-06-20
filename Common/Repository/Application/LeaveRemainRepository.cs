@@ -72,7 +72,7 @@ namespace Common.Repository.Application
             get.LeaveRequest = getLeaveRequest;
             if (get != null)
             {
-                get.Update(id, leaveRemainVM);
+                get.Update(leaveRemainVM);
                 myContext.Entry(get).State = EntityState.Modified;
                 myContext.SaveChanges();
                 status = true;

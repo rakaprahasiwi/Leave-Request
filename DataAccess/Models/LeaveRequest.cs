@@ -41,9 +41,8 @@ namespace DataAccess.Models
             this.CreateDate = DateTimeOffset.Now.ToLocalTime();
         }
 
-        public void Update(int id, LeaveRequestVM leaveRequestVM)
+        public void Update(LeaveRequestVM leaveRequestVM)
         {
-            this.Id = id;
             this.From_Date = leaveRequestVM.From_Date;
             this.Request_Date = leaveRequestVM.Request_Date;
             this.End_Date = leaveRequestVM.End_Date;

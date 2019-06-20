@@ -76,7 +76,7 @@ namespace Common.Repository.Application
             get.StatusTypeParameter = getStatusType;
             if (get != null)
             {
-                get.Update(id, leaveRequestVM);
+                get.Update(leaveRequestVM);
                 myContext.Entry(get).State = EntityState.Modified;
                 myContext.SaveChanges();
                 status = true;

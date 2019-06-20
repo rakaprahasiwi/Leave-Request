@@ -40,6 +40,10 @@ namespace API.Controllers
         }
 
         // PUT: api/StatusTypeParameters/5
+        public void PutStatusTypeParameter(int id, StatusTypeParameterVM statusTypeParameterVM)
+        {
+            iStatusTypeParameterService.Update(id, statusTypeParameterVM);
+        }
 
 
         // POST: api/StatusTypeParameters
@@ -49,5 +53,9 @@ namespace API.Controllers
         }
 
         // DELETE: api/StatusTypeParameters/5
+        public void DeleteStatusTypeParameter(int id)
+        {
+            iStatusTypeParameterService.Delete(id);
+        }
     }
 }
