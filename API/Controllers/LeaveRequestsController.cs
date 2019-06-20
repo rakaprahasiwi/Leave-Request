@@ -82,7 +82,7 @@ namespace API.Controllers
             var result = iLeaveRequestService.Delete(id);
             if (result)
             {
-                message = Request.CreateResponse(HttpStatusCode.OK, "Data Dihapus");
+                message = Request.CreateResponse(HttpStatusCode.OK, "Data Deleted");
             }
             return message;
         }

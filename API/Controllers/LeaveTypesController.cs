@@ -25,58 +25,103 @@ namespace API.Controllers
         {
             iLeaveTypesService = _iLeaveTypesService;
         }
+
         // GET: api/LeaveTypes
         public HttpResponseMessage GetLeaveTypes()
         {
-            var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
-            var result = iLeaveTypesService.Get();
-            if (result != null)
+            try
             {
-                message = Request.CreateResponse(HttpStatusCode.OK, result);
+                var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+                var result = iLeaveTypesService.Get();
+                if (result != null)
+                {
+                    message = Request.CreateResponse(HttpStatusCode.OK, result);
+                }
+                return message;
             }
-            return message;
+            catch(Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Internal Server Error");
+            }
+            
         }
 
         // GET: api/LeaveTypes/5
         public HttpResponseMessage GetLeaveType(int id)
         {
-            var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
-            var result = iLeaveTypesService.Get(id);
-            if (result != null)
+            try
             {
-                message = Request.CreateResponse(HttpStatusCode.OK, result);
+                var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+                var result = iLeaveTypesService.Get(id);
+                if (result != null)
+                {
+                    message = Request.CreateResponse(HttpStatusCode.OK, result);
+                }
+                return message;
             }
-            return message;
+            catch(Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Internal Server Error");
+            }
+            
         }
 
         // PUT: api/LeaveTypes/5
         public HttpResponseMessage PutLeaveType(int id, LeaveTypesVM leaveTypesVM)
         {
-            var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
-            var result = iLeaveTypesService.Update(id, leaveTypesVM);
-            if (result)
+            try
             {
-                message = Request.CreateResponse(HttpStatusCode.OK, leaveTypesVM);
+                var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+                var result = iLeaveTypesService.Update(id, leaveTypesVM);
+                if (result)
+                {
+                    message = Request.CreateResponse(HttpStatusCode.OK, leaveTypesVM);
+                }
+                return message;
             }
-            return message;
+            catch(Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Internal Server Error");
+            }
+            
         }
 
         // POST: api/LeaveTypes
         public HttpResponseMessage InsertLeaveType(LeaveTypesVM leaveTypesVM)
         {
-            var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
-            var result = iLeaveTypesService.Insert(leaveTypesVM);
-            if (result)
+            try
             {
-                message = Request.CreateResponse(HttpStatusCode.OK, leaveTypesVM);
+                var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+                var result = iLeaveTypesService.Insert(leaveTypesVM);
+                if (result)
+                {
+                    message = Request.CreateResponse(HttpStatusCode.OK, leaveTypesVM);
+                }
+                return message;
             }
-            return message;
+            catch(Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Internal Server Error");
+            }
         }
 
         // DELETE: api/LeaveTypes/5
-        public void DeleteLeaveType(int id)
+        public HttpResponseMessage DeleteLeaveType(int id)
         {
-            iLeaveTypesService.Delete(id);
+            try
+            {
+                var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+                var result = iLeaveTypesService.Delete(id);
+                if (result)
+                {
+                    message = Request.CreateResponse(HttpStatusCode.OK, "Data Deleted");
+                }
+                return message;
+            }
+            catch(Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Internal Server Error");
+            }
         }
     }
 }
