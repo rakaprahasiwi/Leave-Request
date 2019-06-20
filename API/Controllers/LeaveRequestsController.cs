@@ -40,7 +40,10 @@ namespace API.Controllers
         }
 
         // PUT: api/LeaveRequests/5
-
+        public void PutLeaveRequest(int id, LeaveRequestVM leaveRequestVM)
+        {
+            iLeaveRequestService.Update(id, leaveRequestVM);
+        }
 
         // POST: api/LeaveRequests
         public void InsertLeaveRequest(LeaveRequestVM leaveRequestVM)
@@ -49,5 +52,9 @@ namespace API.Controllers
         }
 
         // DELETE: api/LeaveRequests/5
+        public void DeleteLeaveRequest(int id)
+        {
+            iLeaveRequestService.Delete(id);
+        }
     }
 }
