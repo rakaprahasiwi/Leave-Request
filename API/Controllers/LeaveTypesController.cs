@@ -26,27 +26,51 @@ namespace API.Controllers
             iLeaveTypesService = _iLeaveTypesService;
         }
         // GET: api/LeaveTypes
-        public List<LeaveTypes> GetLeaveTypes()
+        public HttpResponseMessage GetLeaveTypes()
         {
-            return iLeaveTypesService.Get();
+            var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+            var result = iLeaveTypesService.Get();
+            if (result != null)
+            {
+                message = Request.CreateResponse(HttpStatusCode.OK, result);
+            }
+            return message;
         }
 
         // GET: api/LeaveTypes/5
-        public LeaveTypes GetLeaveType(int id)
+        public HttpResponseMessage GetLeaveType(int id)
         {
-            return iLeaveTypesService.Get(id);
+            var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+            var result = iLeaveTypesService.Get(id);
+            if (result != null)
+            {
+                message = Request.CreateResponse(HttpStatusCode.OK, result);
+            }
+            return message;
         }
 
         // PUT: api/LeaveTypes/5
-        public void PutLeaveType(int id, LeaveTypesVM leaveTypesVM)
+        public HttpResponseMessage PutLeaveType(int id, LeaveTypesVM leaveTypesVM)
         {
-            iLeaveTypesService.Update(id, leaveTypesVM);
+            var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+            var result = iLeaveTypesService.Update(id, leaveTypesVM);
+            if (result)
+            {
+                message = Request.CreateResponse(HttpStatusCode.OK, leaveTypesVM);
+            }
+            return message;
         }
 
         // POST: api/LeaveTypes
-        public void InsertLeaveType(LeaveTypesVM leaveTypesVM)
+        public HttpResponseMessage InsertLeaveType(LeaveTypesVM leaveTypesVM)
         {
-            iLeaveTypesService.Insert(leaveTypesVM);
+            var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+            var result = iLeaveTypesService.Insert(leaveTypesVM);
+            if (result)
+            {
+                message = Request.CreateResponse(HttpStatusCode.OK, leaveTypesVM);
+            }
+            return message;
         }
 
         // DELETE: api/LeaveTypes/5

@@ -28,34 +28,65 @@ namespace API.Controllers
         }
 
         // GET: api/LeaveRequests
-        public List<LeaveRemain> GetLeaveRemains()
+        public HttpResponseMessage GetLeaveRemain()
         {
-            return iLeaveRemainService.Get();
+            var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+            var result = iLeaveRemainService.Get();
+            if (result != null)
+            {
+                message = Request.CreateResponse(HttpStatusCode.OK, result);
+            }
+            return message;
         }
 
         // GET: api/LeaveRemains/5
-        public LeaveRemain GetLeaveRemain(int id)
+        public HttpResponseMessage GetLeaveRemain(int id)
         {
-            return iLeaveRemainService.Get(id);
+            var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+            var result = iLeaveRemainService.Get(id);
+            if (result != null)
+            {
+                message = Request.CreateResponse(HttpStatusCode.OK, result);
+            }
+            return message;
         }
 
         // PUT: api/LeaveRemains/5
-        public void PutLeaveRemain(int id, LeaveRemainVM leaveRemainVM)
+        public HttpResponseMessage PutLeaveRemain(int id,LeaveRemainVM leaveRemainVM)
         {
-            iLeaveRemainService.Update(id, leaveRemainVM);
+            var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+            var result = iLeaveRemainService.Update(id,leaveRemainVM);
+            if (result)
+            {
+                message = Request.CreateResponse(HttpStatusCode.OK, leaveRemainVM);
+            }
+            return message;
         }
+        
 
         // POST: api/LeaveRemains
-        public void InsertLeaveRemain(LeaveRemainVM leaveRemainVM)
+        public HttpResponseMessage InsertLeaveRemain(LeaveRemainVM leaveRemainVM)
         {
-            iLeaveRemainService.Insert(leaveRemainVM);
+            var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+            var result = iLeaveRemainService.Insert(leaveRemainVM);
+            if (result)
+            {
+                message = Request.CreateResponse(HttpStatusCode.OK, leaveRemainVM);
+            }
+            return message;
         }
 
 
         // DELETE: api/LeaveRemains/5
-        public void DeleteLeaveRemain(int id)
+        public HttpResponseMessage DeleteLeaveRemain(int id)
         {
-            iLeaveRemainService.Delete(id);
+            var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+            var result = iLeaveRemainService.Delete(id);
+            if (result)
+            {
+                message = Request.CreateResponse(HttpStatusCode.OK , "Data Dihapus");
+            }
+            return message;
         }
     }
 }
