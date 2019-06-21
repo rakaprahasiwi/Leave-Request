@@ -32,7 +32,7 @@ namespace API.Controllers
         {
             try
             {
-                var message = Request.CreateErrorResponse(HttpStatusCode.NotFound, "Data Not Found");
+                var message = Request.CreateErrorResponse(HttpStatusCode.NotFound, "404 : Data Not Found");
                 var result = iStatusTypeParameterService.Get();
                 if (result != null)
                 {
@@ -42,7 +42,7 @@ namespace API.Controllers
             }
             catch(Exception e)
             {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, "Internal Server Error");
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "500 : Internal Server Error");
             }
             
         }
@@ -52,7 +52,7 @@ namespace API.Controllers
         {
             try
             {
-                var message = Request.CreateErrorResponse(HttpStatusCode.NotFound, "Data Not Found");
+                var message = Request.CreateErrorResponse(HttpStatusCode.NotFound, "404 : Data Not Found");
                 var result = iStatusTypeParameterService.Get(id);
                 if (result != null)
                 {
@@ -62,7 +62,7 @@ namespace API.Controllers
             }
             catch(Exception e)
             {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, "Internal Server Error");
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "500 : Internal Server Error");
             }
             
         }
@@ -72,7 +72,7 @@ namespace API.Controllers
         {
             try
             {
-                var message = Request.CreateErrorResponse(HttpStatusCode.NotFound, "Data Not Found");
+                var message = Request.CreateErrorResponse(HttpStatusCode.NotFound, "404 : Data Not Found");
                 var result = iStatusTypeParameterService.Update(id, statusTypeParameterVM);
                 if (result)
                 {
@@ -82,7 +82,7 @@ namespace API.Controllers
             }
             catch(Exception e)
             {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, "Internal Server Error");
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "500 : Internal Server Error");
             }
         }
 
@@ -98,12 +98,12 @@ namespace API.Controllers
                 }
                 else
                 {
-                    return Request.CreateResponse(HttpStatusCode.NotFound, "Data Not Found");
+                    return Request.CreateResponse(HttpStatusCode.NotFound, "404 : Data Not Found");
                 }
             }
             catch(Exception e)
             {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, "Internal Server Error");
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "500 : Internal Server Error");
             }
             //var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
             //var result = iStatusTypeParameterService.Insert(statusTypeParameterVM);
@@ -122,16 +122,16 @@ namespace API.Controllers
                 var result = iStatusTypeParameterService.Delete(id);
                 if (result)
                 {
-                    return Request.CreateResponse(HttpStatusCode.OK, "Data Deleted");
+                    return Request.CreateResponse(HttpStatusCode.OK, "200 : OK (Data Deleted)");
                 }
                 else
                 {
-                    return Request.CreateResponse(HttpStatusCode.NotFound, "Data Not Found");
+                    return Request.CreateResponse(HttpStatusCode.NotFound, "404 : Data Not Found");
                 }
             }
             catch (Exception ex)
             {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, "Internal Server Error");
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "500 : Internal Server Error");
             }
             //var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
             //var result = iStatusTypeParameterService.Delete(id);

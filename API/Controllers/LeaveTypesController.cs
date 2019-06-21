@@ -31,7 +31,7 @@ namespace API.Controllers
         {
             try
             {
-                var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+                var message = Request.CreateErrorResponse(HttpStatusCode.NotFound, "404 : Data Not Found");
                 var result = iLeaveTypesService.Get();
                 if (result != null)
                 {
@@ -41,7 +41,7 @@ namespace API.Controllers
             }
             catch(Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Internal Server Error");
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "500 : Internal Server Error");
             }
             
         }
@@ -51,7 +51,7 @@ namespace API.Controllers
         {
             try
             {
-                var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+                var message = Request.CreateErrorResponse(HttpStatusCode.NotFound, "404 : Data Not Found");
                 var result = iLeaveTypesService.Get(id);
                 if (result != null)
                 {
@@ -61,7 +61,7 @@ namespace API.Controllers
             }
             catch(Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Internal Server Error");
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "500 : Internal Server Error");
             }
             
         }
@@ -71,7 +71,7 @@ namespace API.Controllers
         {
             try
             {
-                var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+                var message = Request.CreateErrorResponse(HttpStatusCode.NotFound, "404 : Data Not Found");
                 var result = iLeaveTypesService.Update(id, leaveTypesVM);
                 if (result)
                 {
@@ -81,7 +81,7 @@ namespace API.Controllers
             }
             catch(Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Internal Server Error");
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "500 : Internal Server Error");
             }
             
         }
@@ -91,7 +91,7 @@ namespace API.Controllers
         {
             try
             {
-                var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+                var message = Request.CreateErrorResponse(HttpStatusCode.NotFound, "404 : Data Not Found");
                 var result = iLeaveTypesService.Insert(leaveTypesVM);
                 if (result)
                 {
@@ -101,7 +101,7 @@ namespace API.Controllers
             }
             catch(Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Internal Server Error");
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "500 : Internal Server Error");
             }
         }
 
@@ -110,17 +110,17 @@ namespace API.Controllers
         {
             try
             {
-                var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+                var message = Request.CreateErrorResponse(HttpStatusCode.NotFound, "404 : Data Not Found");
                 var result = iLeaveTypesService.Delete(id);
                 if (result)
                 {
-                    message = Request.CreateResponse(HttpStatusCode.OK, "Data Deleted");
+                    message = Request.CreateResponse(HttpStatusCode.OK, "200 : OK (Data Deleted)");
                 }
                 return message;
             }
             catch(Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Internal Server Error");
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "500 : Internal Server Error");
             }
         }
     }
