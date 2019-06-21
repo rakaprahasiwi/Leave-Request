@@ -21,7 +21,14 @@ namespace BusinessLogic.Service.Application
 
         public bool Delete(int id)
         {
-            return iLeaveTypesRepository.Delete(id);
+            if (string.IsNullOrWhiteSpace(id.ToString()))
+            {
+                return false;
+            }
+            else
+            {
+                return iLeaveTypesRepository.Delete(id);
+            }
         }
 
         public List<LeaveTypes> Get()
