@@ -28,33 +28,101 @@ namespace API.Controllers
         }
 
         // GET: api/LeaveRequests
-        public List<LeaveRequest> GetLeaveRequests()
+        public HttpResponseMessage GetLeaveRequests()
         {
-            return iLeaveRequestService.Get();
+            try
+            {
+                var message = Request.CreateErrorResponse(HttpStatusCode.NotFound, "404 : Data Not Found");
+                var result = iLeaveRequestService.Get();
+                if (result != null)
+                {
+                    message = Request.CreateResponse(HttpStatusCode.OK, result);
+                }
+                return message;
+            }
+            catch(Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "500 : Internal Server Error");
+            }
+            
         }
 
         // GET: api/LeaveRequests/5
-        public LeaveRequest GetLeaveRequest(int id)
+        public HttpResponseMessage GetLeaveRequest(int id)
         {
-            return iLeaveRequestService.Get(id);
+            try
+            {
+                var message = Request.CreateErrorResponse(HttpStatusCode.NotFound, "404 : Data Not Found");
+                var result = iLeaveRequestService.Get(id);
+                if (result != null)
+                {
+                    message = Request.CreateResponse(HttpStatusCode.OK, result);
+                }
+                return message;
+            }
+            catch(Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "500 : Internal Server Error");
+            }
         }
 
         // PUT: api/LeaveRequests/5
-        public void PutLeaveRequest(int id, LeaveRequestVM leaveRequestVM)
+        public HttpResponseMessage PutLeaveRequest(int id,LeaveRequestVM leaveRequestVM)
         {
-            iLeaveRequestService.Update(id, leaveRequestVM);
+            try
+            {
+                var message = Request.CreateErrorResponse(HttpStatusCode.NotFound, "404 : Data Not Found");
+                var result = iLeaveRequestService.Update(id, leaveRequestVM);
+                if (result)
+                {
+                    message = Request.CreateResponse(HttpStatusCode.OK, leaveRequestVM);
+                }
+                return message;
+            }
+            catch(Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "500 : Internal Server Error");
+            }
+            
         }
 
         // POST: api/LeaveRequests
-        public void InsertLeaveRequest(LeaveRequestVM leaveRequestVM)
+        public HttpResponseMessage InsertLeaveRequest(LeaveRequestVM leaveRequestVM)
         {
-            iLeaveRequestService.Insert(leaveRequestVM);
+            try
+            {
+                var message = Request.CreateErrorResponse(HttpStatusCode.NotFound, "404 : Data Not Found");
+                var result = iLeaveRequestService.Insert(leaveRequestVM);
+                if (result)
+                {
+                    message = Request.CreateResponse(HttpStatusCode.OK, leaveRequestVM);
+                }
+                return message;
+            }
+            catch(Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "500 : Internal Server Error");
+            }
+            
         }
 
         // DELETE: api/LeaveRequests/5
-        public void DeleteLeaveRequest(int id)
+        public HttpResponseMessage DeleteLeaveRequest(int id)
         {
-            iLeaveRequestService.Delete(id);
+            try
+            {
+                var message = Request.CreateErrorResponse(HttpStatusCode.NotFound, "404 : Data Not Found");
+                var result = iLeaveRequestService.Delete(id);
+                if (result)
+                {
+                    message = Request.CreateResponse(HttpStatusCode.OK, "200 : OK (Data Deleted)");
+                }
+                return message;
+            }
+            catch(Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "500 : Internal Server Error");
+            }
         }
     }
 }

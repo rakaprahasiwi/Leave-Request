@@ -28,34 +28,118 @@ namespace API.Controllers
         }
 
         // GET: api/StatusTypeParameters
-        public List<StatusTypeParameter> GetStatusTypeParameters()
+        public HttpResponseMessage GetStatusTypeParameters()
         {
-            return iStatusTypeParameterService.Get();
+            try
+            {
+                var message = Request.CreateErrorResponse(HttpStatusCode.NotFound, "404 : Data Not Found");
+                var result = iStatusTypeParameterService.Get();
+                if (result != null)
+                {
+                    message = Request.CreateResponse(HttpStatusCode.OK, result);
+                }
+                return message;
+            }
+            catch(Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "500 : Internal Server Error");
+            }
+            
         }
 
         // GET: api/StatusTypeParameters/5
-        public StatusTypeParameter GetStatusTypeParameter(int id)
+        public HttpResponseMessage GetStatusTypeParameter(int id)
         {
-            return iStatusTypeParameterService.Get(id);
+            try
+            {
+                var message = Request.CreateErrorResponse(HttpStatusCode.NotFound, "404 : Data Not Found");
+                var result = iStatusTypeParameterService.Get(id);
+                if (result != null)
+                {
+                    message = Request.CreateResponse(HttpStatusCode.OK, result);
+                }
+                return message;
+            }
+            catch(Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "500 : Internal Server Error");
+            }
+            
         }
 
         // PUT: api/StatusTypeParameters/5
-        public void PutStatusTypeParameter(int id, StatusTypeParameterVM statusTypeParameterVM)
+        public HttpResponseMessage PutStatusTypeParameter(int id, StatusTypeParameterVM statusTypeParameterVM)
         {
-            iStatusTypeParameterService.Update(id, statusTypeParameterVM);
+            try
+            {
+                var message = Request.CreateErrorResponse(HttpStatusCode.NotFound, "404 : Data Not Found");
+                var result = iStatusTypeParameterService.Update(id, statusTypeParameterVM);
+                if (result)
+                {
+                    message = Request.CreateResponse(HttpStatusCode.OK, statusTypeParameterVM);
+                }
+                return message;
+            }
+            catch(Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "500 : Internal Server Error");
+            }
         }
 
-
         // POST: api/StatusTypeParameters
-        public void InsertStatusTypeParameter(StatusTypeParameterVM statusTypeParameterVM)
+        public HttpResponseMessage InsertStatusTypeParameter(StatusTypeParameterVM statusTypeParameterVM)
         {
-            iStatusTypeParameterService.Insert(statusTypeParameterVM);
+            try
+            {
+                var result = iStatusTypeParameterService.Insert(statusTypeParameterVM);
+                if (result)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, statusTypeParameterVM);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound, "404 : Data Not Found");
+                }
+            }
+            catch(Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "500 : Internal Server Error");
+            }
+            //var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+            //var result = iStatusTypeParameterService.Insert(statusTypeParameterVM);
+            //if (result)
+            //{
+            //    message = Request.CreateResponse(HttpStatusCode.OK, statusTypeParameterVM);
+            //}
+            //return message;
         }
 
         // DELETE: api/StatusTypeParameters/5
-        public void DeleteStatusTypeParameter(int id)
+        public HttpResponseMessage DeleteStatusTypeParameter(int id)
         {
-            iStatusTypeParameterService.Delete(id);
+            try
+            {
+                var result = iStatusTypeParameterService.Delete(id);
+                if (result)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, "200 : OK (Data Deleted)");
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound, "404 : Data Not Found");
+                }
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "500 : Internal Server Error");
+            }
+            //var message = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+            //var result = iStatusTypeParameterService.Delete(id);
+            //if (result)
+            //{
+            //    message = Request.CreateResponse(HttpStatusCode.OK, "Data Deleted");
+            //}
+            //return message;
         }
     }
 }
