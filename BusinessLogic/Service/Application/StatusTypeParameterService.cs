@@ -21,7 +21,14 @@ namespace BusinessLogic.Service.Application
 
         public bool Delete(int id)
         {
-            return iStatusTypeParameterRepository.Delete(id);
+            if (string.IsNullOrWhiteSpace(id.ToString()))
+            {
+                return false;
+            }
+            else
+            {
+                return iStatusTypeParameterRepository.Delete(id);
+            }
         }
 
         public List<StatusTypeParameter> Get()
