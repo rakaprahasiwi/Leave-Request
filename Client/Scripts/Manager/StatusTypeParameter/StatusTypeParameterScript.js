@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
     LoadIndexStatusTypeParameter();
-    $('#table').DataTable({
+    $('#tableStatusTypeParameter').DataTable({
         "ajax": LoadIndexStatusTypeParameter()
     })
 })
@@ -9,8 +9,8 @@ function Save() {
     var status = new Object();
     status.name = $('#Name').val();
     $.ajax({
-        url: "/LeaveTypess/InsertOrUpdate/",
-        data: StatusTypeParameter,
+        url: "/StatusTypeParameters/InsertOrUpdate/",
+        data: status,
         success: function (result) {
             swal({
                 title: "Saved!",
@@ -20,20 +20,43 @@ function Save() {
             function () {
                 window.location.href = '/StatusTypeParameters/Index/';
             });
-            LoadIndexLeaveTypes();
+            LoadIndexStatusTypeParameter();
             $('#myModal').modal('hide');
             ClearScreen();
         }
     });
 };
 
-function Edit() {
-    var province = new Object();
-    province.id = $('#Id').val();
-    province.name = $('#Name').val();
+function LoadIndexStatusTypeParameter() {
     $.ajax({
-        url: "/LeaveTypess/InsertOrUpdate/",
-        data: LeaveTypes,
+        type: "GET",
+        async: false,
+        url: "/StatusTypeParameters/LoadStatusTypeParameter/", //shoot to controller client LeaveTypessController
+        dataType: "json",
+        success: function (data) {
+            var html = '';
+            var i = 1;
+            $.each(data, function (index, val) {
+                html += '<tr>';
+                html += '<td>' + i + '</td>';
+                html += '<td>' + val.Name + '</td>';
+                html += '<td>' + '<Button href = "#" class="btn hidden-sm-down btn-success" onclick="return GetById(' + val.Id + ')"><i class="fa fa-pencil"></i>Edit</button>';
+                html += ' | <Button href="#" class="btn hidden-sm-down btn-danger" onclick="return Delete(' + val.Id + ')"><i class="fa fa-trash"></i>Button</Button></td>';
+                html += '</tr>';
+                i++;
+            });
+            $('.tbody').html(html);
+        }
+    })
+}
+
+function Edit() {
+    var status = new Object();
+    status.id = $('#Id').val();
+    status.name = $('#Name').val();
+    $.ajax({
+        url: "/StatusTypeParameters/InsertOrUpdate/",
+        data: status,
         success: function (result) {
             swal({
                 title: "Saved!",
@@ -41,9 +64,9 @@ function Edit() {
                 type: "success"
             },
             function () {
-                window.location.href = '/LeaveTypess/Index/';
+                window.location.href = '/StatusTypeParameters/Index/';
             });
-            LoadIndexLeaveTypes();
+            LoadIndexStatusTypeParameter();
             $('#myModal').modal('hide');
             ClearScreen();
         }
@@ -52,7 +75,7 @@ function Edit() {
 
 function GetById(Id) {
     $.ajax({
-        url: "/LeaveTypes/GetById/",
+        url: "/StatusTypeParameters/GetById/",
         type: "GET",
         dataType: "json",
         data: { id: Id },
@@ -87,7 +110,7 @@ function Delete(Id) {
                     type: "success"
                 },
                     function () {
-                        window.location.href = '/LeaveTypes/Index/';
+                        window.location.href = '/StatusTypeParameters/Index/';
                     });
             },
             error: function (response) {
@@ -112,27 +135,4 @@ function Validate() {
     } else {
         Edit();
     }
-}
-
-function LoadIndexStatusTypeParameter() {
-    $.ajax({
-        type: "GET",
-        async: false,
-        url: "/StatusTypeParameters/LoadStatusTypeParameter/", //shoot to controller client LeaveTypessController
-        dataType: "json",
-        success: function (data) {
-            var html = '';
-            var i = 1;
-            $.each(data, function (index, val) {
-                html += '<tr>';
-                html += '<td>' + i + '</td>';
-                html += '<td>' + val.Name + '</td>';
-                html += '<td>' + '<a href = "#" class="fa fa-pencil" onclick= "return GetById(' + val.Id + ')">Edit</a>';
-                html += ' | <a href="#" class="fa fa-trash" onclick="return Delete(' + val.Id + ')">Delete</a></td>';
-                html += '</tr>';
-                i++;
-            });
-            $('.tbody').html(html);
-        }
-    })
 }

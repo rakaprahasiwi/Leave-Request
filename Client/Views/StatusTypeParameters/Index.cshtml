@@ -4,13 +4,9 @@
     ViewBag.Title = "Index";
 }
 
-<head>
-
-</head>
-<body>
     <div class="container-fluid">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="">Create New</button><br /><br />
-        <table class="table table-hover" id="tableStatusTypeParameter">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="ClearScreen();">Create New</button><br /><br />
+        <table class="table table-hover table-responsive" id="tableStatusTypeParameter">
             <thead>
                 <tr>
                     <th>NO.</th>
@@ -49,7 +45,6 @@
             </div>
         </div>
     </div>
-</body>
 
 @section Scripts{
     <script src="~/Content/jquery/jquery.min.js"></script>

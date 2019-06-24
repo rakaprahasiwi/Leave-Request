@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
     LoadIndexLeaveTypes ();
-    $('#table').DataTable({
+    $('#tableLeaveType').DataTable({
         "ajax": LoadIndexLeaveTypes()
     })
 })
@@ -42,8 +42,8 @@ function LoadIndexLeaveTypes() {
                 html += '<td>' + i + '</td>';
                 html += '<td>' + val.Name + '</td>';
                 html += '<td>' + val.Value + '</td>';
-                html += '<td>' + '<Button href = "#" class="fa fa-pencil" onclick="return GetById(' + val.Id + ')">Edit</button>';
-                html += ' | <Button href="#" class="fa fa-trash" onclick="return Delete(' + val.Id + ')">Button</Button></td>';
+                html += '<td>' + '<Button href = "#" class="btn hidden-sm-down btn-success" onclick="return GetById(' + val.Id + ')"><i class="fa fa-pencil"></i>Edit</button>';
+                html += ' | <Button href="#" class="btn hidden-sm-down btn-danger" onclick="return Delete(' + val.Id + ')"><i class="fa fa-trash"></i>Button</Button></td>';
                 html += '</tr>';
                 i++;
             });

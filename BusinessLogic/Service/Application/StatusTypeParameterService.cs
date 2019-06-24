@@ -66,7 +66,7 @@ namespace BusinessLogic.Service.Application
             }
             else
             {
-                return iStatusTypeParameterRepository.Insert(statusTypeParameterVM);
+                return iStatusTypeParameterRepository.Update(id, statusTypeParameterVM);
             }
         }
     }

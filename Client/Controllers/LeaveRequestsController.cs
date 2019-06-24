@@ -57,11 +57,11 @@ namespace Client.Controllers
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             if (leaveRequestVM.Id.Equals(0))
             {
-                var result = client.PostAsync("LeaveTypes", byteContent).Result;
+                var result = client.PostAsync("LeaveRequest", byteContent).Result;
             }
             else
             {
-                var result = client.PostAsync("LeaveTypes/" + leaveRequestVM.Id, byteContent).Result;
+                var result = client.PostAsync("LeaveRequest/" + leaveRequestVM.Id, byteContent).Result;
             }
         }
 
