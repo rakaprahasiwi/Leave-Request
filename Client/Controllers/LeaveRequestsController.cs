@@ -1,4 +1,5 @@
 ﻿using Core.Base;
+using DataAccess.Models;
 using DataAccess.ViewModels;
 using Newtonsoft.Json;
 using System;
@@ -22,7 +23,7 @@ namespace Client.Controllers
 
         public JsonResult LeaveRequest()
         {
-            IEnumerable<LeaveRequestVM> leaveRequestVM = null;
+            IEnumerable<LeaveRequest> leaveRequest = null;
             var client = new HttpClient
             {
                 BaseAddress = new Uri(get.link)
@@ -32,16 +33,16 @@ namespace Client.Controllers
             var result = responseTask.Result;
             if (result.IsSuccessStatusCode)
             {
-                var readTask = result.Content.ReadAsAsync<IList<LeaveRequestVM>>();
+                var readTask = result.Content.ReadAsAsync<IList<LeaveRequest>>();
                 readTask.Wait();
-                leaveRequestVM = readTask.Result;
+                leaveRequest = readTask.Result;
             }
             else
             {
-                leaveRequestVM = Enumerable.Empty<LeaveRequestVM>();
+                leaveRequest = Enumerable.Empty<LeaveRequest>();
                 ModelState.AddModelError(string.Empty, "Server Error");
             }
-            return Json(leaveRequestVM, JsonRequestBehavior.AllowGet);
+            return Json(leaveRequest, JsonRequestBehavior.AllowGet);
         }
 
         public void InsertOrUpdate(LeaveRequestVM leaveRequestVM)
