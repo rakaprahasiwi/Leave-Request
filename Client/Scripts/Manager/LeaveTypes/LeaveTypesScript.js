@@ -6,11 +6,12 @@
 })
 
 function Save() {
-    var province = new Object();
-    province.name = $('#Name').val();
+    var leave_type = new Object();
+    leave_type.name = $('#Name').val();
+    leave_type.value = $('#Value').val();
     $.ajax({
         url: "/LeaveTypess/InsertOrUpdate/",
-        data: LeaveTypes,
+        data: leave_type,
         success: function (result) {
             swal({
                 title: "Saved!",
@@ -27,13 +28,38 @@ function Save() {
     });
 };
 
+function LoadIndexLeaveTypes() {
+    $.ajax({
+        type: "GET",
+        async: false,
+        url: "/LeaveTypess/LoadLeaveTypes/", //shoot to controller client LeaveTypessController
+        dataType: "json",
+        success: function (data) {
+            var html = '';
+            var i = 1;
+            $.each(data, function (index, val) {
+                html += '<tr>';
+                html += '<td>' + i + '</td>';
+                html += '<td>' + val.Name + '</td>';
+                html += '<td>' + val.Value + '</td>';
+                html += '<td>' + '<Button href = "#" class="fa fa-pencil" onclick="return GetById(' + val.Id + ')">Edit</button>';
+                html += ' | <Button href="#" class="fa fa-trash" onclick="return Delete(' + val.Id + ')">Button</Button></td>';
+                html += '</tr>';
+                i++;
+            });
+            $('.tbody').html(html);
+        }
+    })
+}
+
 function Edit() {
-    var province = new Object();
-    province.id = $('#Id').val();
-    province.name = $('#Name').val();
+    var leave_type = new Object();
+    leave_type.id = $('#Id').val();
+    leave_type.name = $('#Name').val();
+    leave_type.value = $('#Value').val();
     $.ajax({
         url: "/LeaveTypess/InsertOrUpdate/",
-        data: LeaveTypes,
+        data: leave_type,
         success: function (result) {
             swal({
                 title: "Saved!",
@@ -52,13 +78,14 @@ function Edit() {
 
 function GetById(Id) {
     $.ajax({
-        url: "/LeaveTypes/GetById/",
+        url: "/LeaveTypess/GetById/",
         type: "GET",
         dataType: "json",
         data: { id: Id },
         success: function (result) {
             $('#Id').val(result.Id);
             $('#Name').val(result.Name);
+            $('#Value').val(result.Value);
 
             $('#myModal').modal('show');
             $('#Update').show();
@@ -78,7 +105,7 @@ function Delete(Id) {
         closeOnConfirm: false
     }, function () {
         $.ajax({
-            url: "/LeaveTypes/Delete/",
+            url: "/LeaveTypess/Delete/",
             data: { id: Id },
             success: function (response) {
                 swal({
@@ -87,7 +114,7 @@ function Delete(Id) {
                     type: "success"
                 },
                     function () {
-                        window.location.href = '/LeaveTypes/Index/';
+                        window.location.href = '/LeaveTypess/Index/';
                     });
             },
             error: function (response) {
@@ -99,6 +126,7 @@ function Delete(Id) {
 
 function ClearScreen() {
     $('#Name').val('');
+    $('#Value').val('');
     $('#Id').val('');
     $('#Update').hide();
     $('#Save').show();
@@ -107,6 +135,8 @@ function ClearScreen() {
 function Validate() {
     if ($('#Name').val() == "" || $('#Name').val() == " ") {
         swal("Oops", "Please Insert Name", "error")
+    } else if ($('#Value').val() == 0 || $('#Value').val() == " " || $('#Value').val() == " ") {
+        swal("Oops", "Expected Value", "error")
     } else if ($('#Id').val() == "") {
         Save();
     } else {
@@ -114,26 +144,3 @@ function Validate() {
     }
 }
 
-function LoadIndexLeaveTypes() {
-    $.ajax({
-        type: "GET",
-        async: false,
-        url: "/LeaveTypess/LoadLeaveTypes/", //shoot to controller client LeaveTypessController
-        dataType: "json",
-        success: function (data) {
-            var html = '';
-            var i = 1;
-            $.each(data, function(index, val){
-                html += '<tr>';
-                html += '<td>' + i + '</td>';
-                html += '<td>' + val.Name + '</td>';
-                html += '<td>' + val.Value + '</td>';
-                html += '<td>' + '<a href = "#" class="fa fa-pencil" onclick= "return GetById(' + val.Id + ')">Edit</a>';
-                html += ' | <a href="#" class="fa fa-trash" onclick="return Delete(' + val.Id + ')">Delete</a></td>';
-                html += '</tr>';
-                i++;
-            });
-            $('.tbody').html(html);
-        }
-    })
-}
