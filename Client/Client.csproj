@@ -364,6 +364,8 @@
     <Content Include="Content\assets\js\jquery.slimscroll.js" />
     <Content Include="Content\assets\js\jsgrid-init.js" />
     <Content Include="Content\assets\js\mask.js" />
+    <Content Include="Content\assets\js\moment-with-locales.js" />
+    <Content Include="Content\assets\js\moment.js" />
     <Content Include="Content\assets\js\morris-data.js" />
     <Content Include="Content\assets\js\sidebarmenu.js" />
     <Content Include="Content\assets\js\toastr.js" />

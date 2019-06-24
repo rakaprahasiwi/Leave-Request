@@ -21,9 +21,9 @@ function LoadIndexLeaveRequest() {
                 html += '<td>' + val.Manager_Id + '</td>';
                 html += '<td>' + val.LeaveTypes.Name + '</td>';
                 html += '<td>' + val.Reason + '</td>';
-                html += '<td>' + val.Request_Date + '</td>';
-                html += '<td>' + val.From_Date + '</td>';
-                html += '<td>' + val.End_Date + '</td>';
+                html += '<td>' + moment(val.Request_Date).format("MMM Do YY") + '</td>';
+                html += '<td>' + moment(val.From_Date).format("MMM Do YY") + '</td>';
+                html += '<td>' + moment(val.End_Date).format("MMM Do YY") + '</td>';
                 html += '<td>' + val.Attachment + '</td>';
                 html += '<td>' + val.StatusTypeParameter.Name + '</td>';
                 html += '<td>' + '<a href = "#" class="fa da-pencil" onclick= return GetById(' + val.Id + ')">Edit</a>';
