@@ -28,7 +28,7 @@ namespace API.Controllers
         }
 
         // GET: api/Calendars
-        public HttpResponseMessage GetCalendar()
+        public HttpResponseMessage GetCalendars()
         {
             try
             {

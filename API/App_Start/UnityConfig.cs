@@ -23,13 +23,13 @@ namespace API
             container.RegisterType<ILeaveRemainRepository, LeaveRemainRepository>();
             container.RegisterType<ILeaveRequestRepository, LeaveRequestRepository>();
             container.RegisterType<ILeaveTypeRepository, LeaveTypeRepository>();
-            container.RegisterType<IStatusTypeParameterRepository, StatusTypeParameterRepository>();
+            container.RegisterType<ICalendarRepository, CalendarRepository>();
 
             //this is for service
             container.RegisterType<ILeaveRemainService, LeaveRemainService>();
             container.RegisterType<ILeaveRequestService, LeaveRequestService>();
             container.RegisterType<ILeaveTypeService, LeaveTypeService>();
-            container.RegisterType<IStatusTypeParameterService, StatusTypeParameterService>();
+            container.RegisterType<ICalendarService, CalendarService>();
 
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }

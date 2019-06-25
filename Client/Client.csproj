@@ -211,12 +211,12 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CalendarsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeaveRemainsController.cs" />
     <Compile Include="Controllers\LeaveRequestsController.cs" />
-    <Compile Include="Controllers\LeaveTypessController.cs" />
+    <Compile Include="Controllers\LeaveTypesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\StatusTypeParametersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -4103,7 +4103,6 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\Manager\StatusTypeParameter\StatusTypeParameterScript.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -4144,11 +4143,11 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\LeaveTypess\Index.cshtml" />
     <Content Include="Views\Shared\AdminLayout\_LayoutAdministrator.cshtml" />
-    <Content Include="Views\StatusTypeParameters\Index.cshtml" />
     <Content Include="Views\LeaveRequests\Index.cshtml" />
     <Content Include="Views\LeaveRemains\Index.cshtml" />
     <Content Include="Views\Home\Dashboard.cshtml" />
     <Content Include="Views\Shared\UserLayout\_LayoutUser.cshtml" />
+    <Content Include="Views\Calendars\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

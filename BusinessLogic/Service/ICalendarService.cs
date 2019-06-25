@@ -14,7 +14,7 @@ namespace BusinessLogic.Service
         List<Calendar> GetSearch(string values);
         Calendar Get(int id);
         bool Insert(CalendarVM calendarVM);
-        bool Update(int id, CalendarVM calendarVM));
+        bool Update(int id, CalendarVM calendarVM);
         bool Delete(int id);
     }
 }

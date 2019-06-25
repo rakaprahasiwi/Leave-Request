@@ -28,7 +28,7 @@ namespace API.Controllers
         }
 
         // GET: api/LeaveRequests
-        public HttpResponseMessage GetLeaveRemain()
+        public HttpResponseMessage GetLeaveRemains()
         {
             try
             {

@@ -12,77 +12,75 @@ using System.Web.Mvc;
 
 namespace Client.Controllers
 {
-    public class LeaveTypessController : Controller
+    public class CalendarsController : Controller
     {
         BaseLink get = new BaseLink();
-
-        // GET: LeaveTypess
+        
+        // GET: Calendars
         public ActionResult Index()
         {
-            return View(LoadLeaveTypes());
+            return View(LoadCalendar());
         }
 
-        public JsonResult LoadLeaveTypes()
+        public JsonResult LoadCalendar()
         {
-            IEnumerable<LeaveType> leaveTypes = null;
-            var client = new HttpClient
-            {
-                BaseAddress = new Uri(get.link)
-            };
-            var responseTask = client.GetAsync("LeaveTypes");
+            IEnumerable<Calendar> calendar = null;
+            var client = new HttpClient();
+            client.BaseAddress = new Uri(get.link);
+            var responseTask = client.GetAsync("Calendars");
             responseTask.Wait();
             var result = responseTask.Result;
             if (result.IsSuccessStatusCode)
             {
-                var readTask = result.Content.ReadAsAsync<IList<LeaveType>>();
+                var readTask = result.Content.ReadAsAsync<IList<Calendar>>();
                 readTask.Wait();
-                leaveTypes = readTask.Result;
+                calendar = readTask.Result;
             }
             else
             {
-                leaveTypes = Enumerable.Empty<LeaveType>();
+                calendar = Enumerable.Empty<Calendar>();
                 ModelState.AddModelError(string.Empty, "Server Error");
             }
-            return Json(leaveTypes, JsonRequestBehavior.AllowGet);
+            return Json(calendar, JsonRequestBehavior.AllowGet);
         }
 
-        public void InsertOrUpdate(LeaveTypeVM leaveTypesVM)
+        public void InsertOrUpdate(CalendarVM calendarVM)
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(get.link);
-            var myContent = JsonConvert.SerializeObject(leaveTypesVM);
+            var myContent = JsonConvert.SerializeObject(calendarVM);
             var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
             var byteContent = new ByteArrayContent(buffer);
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            if (leaveTypesVM.Id.Equals(0))
+            if (calendarVM.Id.Equals(0))
             {
-                var result = client.PostAsync("LeaveTypes", byteContent).Result;
+                var result = client.PostAsync("Calendars", byteContent).Result;
             }
             else
             {
-                var result = client.PutAsync("LeaveTypes/"+ leaveTypesVM.Id, byteContent).Result;
+                var result = client.PutAsync("Calendars/" + calendarVM.Id, byteContent).Result;
             }
         }
 
         public JsonResult GetById(int id)
         {
-            LeaveTypeVM leaveTypesVM = null;
+            CalendarVM calendarVM = null;
             var client = new HttpClient();
             client.BaseAddress = new Uri(get.link);
-            var responseTask = client.GetAsync("LeaveTypes/" + id);
+            var responseTask = client.GetAsync("Calendars/" + id);
             responseTask.Wait();
             var result = responseTask.Result;
             if (result.IsSuccessStatusCode)
             {
-                var readTask = result.Content.ReadAsAsync<LeaveTypeVM>();
+                var readTask = result.Content.ReadAsAsync<CalendarVM>();
                 readTask.Wait();
-                leaveTypesVM = readTask.Result;
+                calendarVM = readTask.Result;
             }
             else
             {
 
             }
-            return Json(leaveTypesVM, JsonRequestBehavior.AllowGet);
+            return Json(calendarVM, JsonRequestBehavior.AllowGet);
         }
 
         public void Delete(int id)
@@ -91,7 +89,7 @@ namespace Client.Controllers
             {
                 BaseAddress = new Uri(get.link)
             };
-            var result = client.DeleteAsync("LeaveTypes/" + id).Result;
+            var result = client.DeleteAsync("Calendars/" + id).Result;
         }
     }
 }
