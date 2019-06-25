@@ -1,4 +1,5 @@
 ﻿using Core.Base;
+using DataAccess.Models;
 using DataAccess.ViewModels;
 using Newtonsoft.Json;
 using System;
@@ -22,7 +23,7 @@ namespace Client.Controllers
 
         public JsonResult LoadLeaveRemain()
         {
-            IEnumerable<LeaveRemainVM> leaveRemainVM = null;
+            IEnumerable<LeaveRemain> leaveRemain = null;
             var client = new HttpClient
             {
                 BaseAddress = new Uri(get.link)
@@ -32,16 +33,16 @@ namespace Client.Controllers
             var result = responseTask.Result;
             if (result.IsSuccessStatusCode)
             {
-                var readTask = result.Content.ReadAsAsync<IList<LeaveRemainVM>>();
+                var readTask = result.Content.ReadAsAsync<IList<LeaveRemain>>();
                 readTask.Wait();
-                leaveRemainVM = readTask.Result;
+                leaveRemain = readTask.Result;
             }
             else
             {
-                leaveRemainVM = Enumerable.Empty<LeaveRemainVM>();
+                leaveRemain = Enumerable.Empty<LeaveRemain>();
                 ModelState.AddModelError(string.Empty, "Server Error");
             }
-            return Json(leaveRemainVM, JsonRequestBehavior.AllowGet);
+            return Json(leaveRemain, JsonRequestBehavior.AllowGet);
         }
 
         public void InsertOrUpdate(LeaveRemainVM leaveRemainVM)
@@ -56,11 +57,11 @@ namespace Client.Controllers
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             if (leaveRemainVM.Id.Equals(0))
             {
-                var result = client.PostAsync("LeaveRemain", byteContent).Result;
+                var result = client.PostAsync("LeaveRemains", byteContent).Result;
             }
             else
             {
-                var result = client.PostAsync("LeaveRemain/" + leaveRemainVM.Id, byteContent).Result;
+                var result = client.PutAsync("LeaveRemains/" + leaveRemainVM.Id, byteContent).Result;
             }
         }
 
@@ -71,7 +72,7 @@ namespace Client.Controllers
             {
                 BaseAddress = new Uri(get.link)
             };
-            var responseTask = client.GetAsync("LeaveRemain/" + id);
+            var responseTask = client.GetAsync("LeaveRemains/" + id);
             responseTask.Wait();
             var result = responseTask.Result;
             if (result.IsSuccessStatusCode)
@@ -93,7 +94,7 @@ namespace Client.Controllers
             {
                 BaseAddress = new Uri(get.link)
             };
-            var result = client.DeleteAsync("LeaveRemain/" + id).Result;
+            var result = client.DeleteAsync("LeaveRemains/" + id).Result;
         }
     }
 }
