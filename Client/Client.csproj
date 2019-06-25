@@ -4094,6 +4094,7 @@
     <Content Include="Content\assets\scss\variable.scss" />
     <Content Include="Content\assets\scss\widgets.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Manager\Calendar\CalendarScript.js" />
     <Content Include="Scripts\Manager\LeaveRemain\LeaveRemainScript.js" />
     <Content Include="Scripts\Manager\LeaveRequest\LeaveRequestScript.js" />
     <Content Include="Scripts\Manager\LeaveTypes\LeaveTypesScript.js" />
@@ -4142,7 +4143,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\LeaveTypess\Index.cshtml" />
+    <Content Include="Views\LeaveTypes\Index.cshtml" />
     <Content Include="Views\Shared\AdminLayout\_LayoutAdministrator.cshtml" />
     <Content Include="Views\LeaveRequests\Index.cshtml" />
     <Content Include="Views\LeaveRemains\Index.cshtml" />

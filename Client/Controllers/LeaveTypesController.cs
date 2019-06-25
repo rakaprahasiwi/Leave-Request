@@ -19,12 +19,12 @@ namespace Client.Controllers
         // GET: LeaveTypess
         public ActionResult Index()
         {
-            return View(LoadLeaveTypes());
+            return View(LoadLeaveType());
         }
 
-        public JsonResult LoadLeaveTypes()
+        public JsonResult LoadLeaveType()
         {
-            IEnumerable<LeaveType> leaveTypes = null;
+            IEnumerable<LeaveType> leaveType = null;
             var client = new HttpClient
             {
                 BaseAddress = new Uri(get.link)
@@ -36,37 +36,37 @@ namespace Client.Controllers
             {
                 var readTask = result.Content.ReadAsAsync<IList<LeaveType>>();
                 readTask.Wait();
-                leaveTypes = readTask.Result;
+                leaveType = readTask.Result;
             }
             else
             {
-                leaveTypes = Enumerable.Empty<LeaveType>();
+                leaveType = Enumerable.Empty<LeaveType>();
                 ModelState.AddModelError(string.Empty, "Server Error");
             }
-            return Json(leaveTypes, JsonRequestBehavior.AllowGet);
+            return Json(leaveType, JsonRequestBehavior.AllowGet);
         }
 
-        public void InsertOrUpdate(LeaveTypeVM leaveTypesVM)
+        public void InsertOrUpdate(LeaveTypeVM leaveTypeVM)
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(get.link);
-            var myContent = JsonConvert.SerializeObject(leaveTypesVM);
+            var myContent = JsonConvert.SerializeObject(leaveTypeVM);
             var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
             var byteContent = new ByteArrayContent(buffer);
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            if (leaveTypesVM.Id.Equals(0))
+            if (leaveTypeVM.Id.Equals(0))
             {
                 var result = client.PostAsync("LeaveTypes", byteContent).Result;
             }
             else
             {
-                var result = client.PutAsync("LeaveTypes/"+ leaveTypesVM.Id, byteContent).Result;
+                var result = client.PutAsync("LeaveTypes/"+ leaveTypeVM.Id, byteContent).Result;
             }
         }
 
         public JsonResult GetById(int id)
         {
-            LeaveTypeVM leaveTypesVM = null;
+            LeaveTypeVM leaveTypeVM = null;
             var client = new HttpClient();
             client.BaseAddress = new Uri(get.link);
             var responseTask = client.GetAsync("LeaveTypes/" + id);
@@ -76,13 +76,13 @@ namespace Client.Controllers
             {
                 var readTask = result.Content.ReadAsAsync<LeaveTypeVM>();
                 readTask.Wait();
-                leaveTypesVM = readTask.Result;
+                leaveTypeVM = readTask.Result;
             }
             else
             {
 
             }
-            return Json(leaveTypesVM, JsonRequestBehavior.AllowGet);
+            return Json(leaveTypeVM, JsonRequestBehavior.AllowGet);
         }
 
         public void Delete(int id)
