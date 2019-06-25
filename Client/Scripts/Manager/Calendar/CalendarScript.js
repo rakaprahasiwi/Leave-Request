@@ -1,18 +1,18 @@
 ﻿$(document).ready(function () {
-    LoadIndexLeaveType();
-    $('#tableLeaveType').DataTable({
-        "ajax": LoadIndexLeaveType()
-    })
+    LoadIndexCalendar();
+    $('#tableCalendar').DataTable({
+        "ajax": LoadIndexCalendar()
+    });
 })
 
 function Save() {
-    var leave_type = new Object();
-    leave_type.name = $('#Name').val();
-    leave_type.duration = $('#Duration').val();
-    leave_type.note = $('#Note').val();
+    var calendar = new Object();
+    calendar.name = $('#Name').val();
+
+    calendar.national_date = $('#National_Date').val();
     $.ajax({
-        url: "/LeaveTypes/InsertOrUpdate/",
-        data: leave_type,
+        url: "/Calendars/InsertOrUpdate/",
+        data: calendar,
         success: function (result) {
             swal({
                 title: "Saved!",
@@ -20,21 +20,21 @@ function Save() {
                 type: "success"
             },
             function () {
-                window.location.href = '/LeaveTypes/Index/';
+                window.location.href = '/Calendars/Index/';
             });
-            LoadIndexLeaveType();
+            LoadIndexCalendar();
             $('#myModal').modal('hide');
             ClearScreen();
         }
     });
 };
 
-function LoadIndexLeaveType() {
+function LoadIndexCalendar() {
     $.ajax({
         type: "GET",
         async: false,
-        url: "/LeaveTypes/LoadLeaveType/", //shoot to controller client LeaveTypessController
-        dataType: "json",
+        url: "/Calendars/LoadCalendar/",
+        dateType: "json",
         success: function (data) {
             var html = '';
             var i = 1;
@@ -42,27 +42,27 @@ function LoadIndexLeaveType() {
                 html += '<tr>';
                 html += '<td>' + i + '</td>';
                 html += '<td>' + val.Name + '</td>';
-                html += '<td>' + val.Duration + '</td>';
-                html += '<td>' + val.Note + '</td>';
-                html += '<td>' + '<Button href = "#" class="btn btn-info" onclick="return GetById(' + val.Id + ')"><i class="fa fa-pencil"></i></button>';
-                html += ' <Button href="#" class="btn btn-danger" onclick="return Delete(' + val.Id + ')"><i class="fa fa-trash"></i></Button></td>';
+                html += '<td>' + moment(val.National_Date).format("MM/DD/YYYY") + '</td>';
+                html += '<td> <Button href = "#" class="btn btn-info" onclick="return GetById(' + val.Id + ')"><i class="fa fa-pencil"></i></Button>';
+                html += ' <Button href = "#" class="btn btn-danger" onclick="return Delete(' + val.Id + ')"><i class="fa fa-trash"></i></Button></td>';
                 html += '</tr>';
                 i++;
             });
             $('.tbody').html(html);
         }
-    })
+    });
 }
 
 function Edit() {
-    var leave_type = new Object();
-    leave_type.id = $('#Id').val();
-    leave_type.name = $('#Name').val();
-    leave_type.duration = $('#Duration').val();
-    leave_type.note = $('#Note').val();
+    var calendar = new Object();
+    calendar.id = $('#Id').val();
+    calendar.name = $('#Name').val();
+    debugger;
+    calendar.national_date = $('#National_Date').val();
+    debugger;
     $.ajax({
-        url: "/LeaveTypes/InsertOrUpdate/",
-        data: leave_type,
+        url: "/Calendars/InsertOrUpdate/",
+        data: calendar,
         success: function (result) {
             swal({
                 title: "Saved!",
@@ -70,9 +70,9 @@ function Edit() {
                 type: "success"
             },
             function () {
-                window.location.href = '/LeaveTypes/Index/';
+                window.location.href = '/Calendars/Index/';
             });
-            LoadIndexLeaveTypes();
+            LoadIndexCalendar();
             $('#myModal').modal('hide');
             ClearScreen();
         }
@@ -81,16 +81,16 @@ function Edit() {
 
 function GetById(Id) {
     $.ajax({
-        url: "/LeaveTypes/GetById/",
+        url: "/Calendars/GetById/",
         type: "GET",
         dataType: "json",
         data: { id: Id },
         success: function (result) {
             $('#Id').val(result.Id);
             $('#Name').val(result.Name);
-            $('#Duration').val(result.Duration);
-            $('#Note').val(result.Note);
-
+            debugger;
+            $('#National_Date').val(moment(result.National_Date).format("MM/DD/YYYY"));
+            debugger;
             $('#myModal').modal('show');
             $('#Update').show();
             $('#Save').hide();
@@ -109,7 +109,7 @@ function Delete(Id) {
         closeOnConfirm: false
     }, function () {
         $.ajax({
-            url: "/LeaveTypes/Delete/",
+            url: "/Calendars/Delete/",
             data: { id: Id },
             success: function (response) {
                 swal({
@@ -118,7 +118,7 @@ function Delete(Id) {
                     type: "success"
                 },
                     function () {
-                        window.location.href = '/LeaveTypes/Index/';
+                        window.location.href = '/Calendars/Index/';
                     });
             },
             error: function (response) {
@@ -130,8 +130,7 @@ function Delete(Id) {
 
 function ClearScreen() {
     $('#Name').val('');
-    $('#Duration').val('');
-    $('#Note').val('Choose');
+    $('#National_Date').val('');
     $('#Id').val('');
     $('#Update').hide();
     $('#Save').show();
@@ -140,14 +139,12 @@ function ClearScreen() {
 function Validate() {
     if ($('#Name').val() == "" || $('#Name').val() == " ") {
         swal("Oops", "Please Insert Name", "error")
-    } else if ($('#Duration').val() == 0 || $('#Duration').val() == " " || $('#Duration').val() == " ") {
-        swal("Oops", "Expected Value", "error")
-    } else if ($('#Note').val() == "Choose") {
-        swal("Oops", "Expected Note", "error")
-    } else if ($('#Id').val() == "") {
+    } else if ($('#National_Date').val() == "") {
+        swal("Oops", "Please Choose Date", "error")
+    }
+    else if ($('#Id').val() == "") {
         Save();
     } else {
         Edit();
     }
 }
-
