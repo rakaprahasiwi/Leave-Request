@@ -17,7 +17,7 @@ namespace DataAccess.Context
 
         public DbSet<LeaveRemain> LeaveRemains { get; set; }
         public DbSet<LeaveRequest> LeaveRequests { get; set; }
-        public DbSet<LeaveTypes> LeaveTypess { get; set; }
-        public DbSet<StatusTypeParameter> StatusTypeParameters { get; set; }
+        public DbSet<LeaveType> LeaveTypes { get; set; }
+        public DbSet<Calendar> Calendars { get; set; }
     }
 }

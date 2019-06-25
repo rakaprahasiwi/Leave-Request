@@ -9,21 +9,24 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Models
 {
-    [Table("TB_M_StatusTypeParameter")]
-    public class StatusTypeParameter : BaseModel
+    [Table("TB_M_Calendar")]
+    public class Calendar : BaseModel
     {
         public string Name { get; set; }
+        public DateTimeOffset National_Date { get; set; }
 
-        public StatusTypeParameter() { }
-        public StatusTypeParameter(StatusTypeParameterVM statusTypeParameterVM)
+        public Calendar() { }
+        public Calendar(CalendarVM calendarVM)
         {
-            this.Name = statusTypeParameterVM.Name;
+            this.Name = calendarVM.Name;
+            this.National_Date = calendarVM.National_Date;
             this.CreateDate = DateTimeOffset.Now.ToLocalTime();
         }
 
-        public void Update(StatusTypeParameterVM statusTypeParameterVM)
+        public void Update(CalendarVM calendarVM)
         {
-            this.Name = statusTypeParameterVM.Name;
+            this.Name = calendarVM.Name;
+            this.National_Date = calendarVM.National_Date;
             this.UpdateDate = DateTimeOffset.Now.ToLocalTime();
         }
 

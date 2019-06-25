@@ -10,7 +10,7 @@ using System.Data.Entity;
 
 namespace Common.Repository.Application
 {
-    public class LeaveTypesRepository : ILeaveTypesRepository
+    public class LeaveTypeRepository : ILeaveTypeRepository
     {
         MyContext myContext = new MyContext();
 
@@ -30,28 +30,28 @@ namespace Common.Repository.Application
             }
         }
 
-        public List<LeaveTypes> Get()
+        public List<LeaveType> Get()
         {
-            var get = myContext.LeaveTypess.Where(x => x.IsDelete == false).ToList();
+            var get = myContext.LeaveTypes.Where(x => x.IsDelete == false).ToList();
             return get;
         }
 
-        public LeaveTypes Get(int id)
+        public LeaveType Get(int id)
         {
-            var get = myContext.LeaveTypess.Find(id);
+            var get = myContext.LeaveTypes.Find(id);
             return get;
         }
 
-        public List<LeaveTypes> GetSearch(string values)
+        public List<LeaveType> GetSearch(string values)
         {
-            var get = myContext.LeaveTypess.Where(x => (x.Name.Contains(values) || x.Id.ToString().Contains(values)) && x.IsDelete == false).ToList();
+            var get = myContext.LeaveTypes.Where(x => (x.Name.Contains(values) || x.Id.ToString().Contains(values) || x.Duration.ToString().Contains(values) || x.Note.Contains(values)) && x.IsDelete == false).ToList();
             return get;
         }
 
-        public bool Insert(LeaveTypesVM leaveTypesVM)
+        public bool Insert(LeaveTypeVM leaveTypeVM)
         {
-            var push = new LeaveTypes(leaveTypesVM);
-            myContext.LeaveTypess.Add(push);
+            var push = new LeaveType(leaveTypeVM);
+            myContext.LeaveTypes.Add(push);
             var result = myContext.SaveChanges();
             if (result > 0)
             {
@@ -63,12 +63,12 @@ namespace Common.Repository.Application
             }
         }
 
-        public bool Update(int id, LeaveTypesVM leaveTypesVM)
+        public bool Update(int id, LeaveTypeVM leaveTypeVM)
         {
             var get = Get(id);
             if (get != null)
             {
-                get.Update(leaveTypesVM);
+                get.Update(leaveTypeVM);
                 myContext.Entry(get).State = EntityState.Modified;
                 var result = myContext.SaveChanges();
                 return result > 0;

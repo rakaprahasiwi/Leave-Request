@@ -4,25 +4,22 @@
     ViewBag.Title = "Index";
 }
 
-<head>
+<div class="container-fluid">
+    <hr />
+    <table class="table table-hover" id="tableLeaveType">
+        <thead>
+            <tr>
+                <th>NO.</th>
+                <th>EMPLOYEE ID</th>
+                <th>LEAVE REQUEST ID</th>
+                <th>DURATION</th>
+                <th>ACTION</th>
+            </tr>
+        </thead>
+        <tbody class="tbody"></tbody>
+    </table>
+</div>
 
-</head>
-<body>
-    <div class="container-fluid">
-        <table class="table table-hover" id="tableLeaveType">
-            <thead>
-                <tr>
-                    <th>NO.</th>
-                    <th>EMPLOYEE ID</th>
-                    <th>LEAVE REQUEST ID</th>
-                    <th>DURATION</th>
-                    <th>ACTION</th>
-                </tr>
-            </thead>
-            <tbody class="tbody"></tbody>
-        </table>
-    </div>
-</body>
 
 @section Scripts{
     <script src="~/Content/jquery/jquery.min.js"></script>

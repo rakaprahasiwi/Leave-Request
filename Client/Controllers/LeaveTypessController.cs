@@ -24,7 +24,7 @@ namespace Client.Controllers
 
         public JsonResult LoadLeaveTypes()
         {
-            IEnumerable<LeaveTypes> leaveTypes = null;
+            IEnumerable<LeaveType> leaveTypes = null;
             var client = new HttpClient
             {
                 BaseAddress = new Uri(get.link)
@@ -34,19 +34,19 @@ namespace Client.Controllers
             var result = responseTask.Result;
             if (result.IsSuccessStatusCode)
             {
-                var readTask = result.Content.ReadAsAsync<IList<LeaveTypes>>();
+                var readTask = result.Content.ReadAsAsync<IList<LeaveType>>();
                 readTask.Wait();
                 leaveTypes = readTask.Result;
             }
             else
             {
-                leaveTypes = Enumerable.Empty<LeaveTypes>();
+                leaveTypes = Enumerable.Empty<LeaveType>();
                 ModelState.AddModelError(string.Empty, "Server Error");
             }
             return Json(leaveTypes, JsonRequestBehavior.AllowGet);
         }
 
-        public void InsertOrUpdate(LeaveTypesVM leaveTypesVM)
+        public void InsertOrUpdate(LeaveTypeVM leaveTypesVM)
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(get.link);
@@ -66,7 +66,7 @@ namespace Client.Controllers
 
         public JsonResult GetById(int id)
         {
-            LeaveTypesVM leaveTypesVM = null;
+            LeaveTypeVM leaveTypesVM = null;
             var client = new HttpClient();
             client.BaseAddress = new Uri(get.link);
             var responseTask = client.GetAsync("LeaveTypes/" + id);
@@ -74,7 +74,7 @@ namespace Client.Controllers
             var result = responseTask.Result;
             if (result.IsSuccessStatusCode)
             {
-                var readTask = result.Content.ReadAsAsync<LeaveTypesVM>();
+                var readTask = result.Content.ReadAsAsync<LeaveTypeVM>();
                 readTask.Wait();
                 leaveTypesVM = readTask.Result;
             }

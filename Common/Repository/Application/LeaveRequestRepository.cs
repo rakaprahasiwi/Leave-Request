@@ -30,22 +30,25 @@ namespace Common.Repository.Application
 
         public List<LeaveRequest> Get()
         {
-            var get = myContext.LeaveRequests.Include("LeaveTypes").Include("StatusTypeParameter").Where(x => x.IsDelete == false).ToList();
+            var get = myContext.LeaveRequests.Include("LeaveType").Where(x => x.IsDelete == false).ToList();
             return get;
         }
 
         public LeaveRequest Get(int id)
         {
-            var get = myContext.LeaveRequests.Include("LeaveTypes").Include("StatusTypeParameter").SingleOrDefault(x => x.Id == id);
+            var get = myContext.LeaveRequests.Include("LeaveType").SingleOrDefault(x => x.Id == id);
             return get;
         }
 
         public List<LeaveRequest> GetSearch(string values)
         {
-            var get = myContext.LeaveRequests.Where
+            var get = myContext.LeaveRequests.Include("LeaveType").Where
                 (x => (x.Employee_Id.ToString().Contains(values) ||
                 x.Manager_Id.ToString().Contains(values) ||
-                x.Id.ToString().Contains(values)) &&
+                x.Id.ToString().Contains(values) ||
+                x.Reason.Contains(values) ||
+                x.Status.Contains(values) ||
+                x.LeaveType_Id.ToString().Contains(values)) &&
                 x.IsDelete == false).ToList();
             return get;
         }
@@ -53,10 +56,8 @@ namespace Common.Repository.Application
         public bool Insert(LeaveRequestVM leaveRequestVM)
         {
             var push = new LeaveRequest(leaveRequestVM);
-            var getLeaveType = myContext.LeaveTypess.Find(leaveRequestVM.LeaveTypes_Id);
-            var getStatusType = myContext.StatusTypeParameters.Find(leaveRequestVM.StatusTypeParameter_Id);
-            push.LeaveTypes = getLeaveType;
-            push.StatusTypeParameter = getStatusType;
+            var getLeaveType = myContext.LeaveTypes.Find(leaveRequestVM.LeaveType_Id);
+            push.LeaveType = getLeaveType;
             myContext.LeaveRequests.Add(push);
             var result = myContext.SaveChanges();
             if (result > 0)
@@ -70,10 +71,8 @@ namespace Common.Repository.Application
         public bool Update(int id, LeaveRequestVM leaveRequestVM)
         {
             var get = Get(id);
-            var getLeaveType = myContext.LeaveTypess.Find(leaveRequestVM.LeaveTypes_Id);
-            var getStatusType = myContext.StatusTypeParameters.Find(leaveRequestVM.StatusTypeParameter_Id);
-            get.LeaveTypes = getLeaveType;
-            get.StatusTypeParameter = getStatusType;
+            var getLeaveType = myContext.LeaveTypes.Find(leaveRequestVM.LeaveType_Id);
+            get.LeaveType = getLeaveType;
             if (get != null)
             {
                 get.Update(leaveRequestVM);

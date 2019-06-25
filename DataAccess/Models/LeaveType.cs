@@ -9,24 +9,27 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Models
 {
-    [Table("TB_M_LeaveTypes")]
-    public class LeaveTypes : BaseModel
+    [Table("TB_M_LeaveType")]
+    public class LeaveType : BaseModel
     {
         public string Name { get; set; }
-        public int Value { get; set; }
+        public int Duration { get; set; }
+        public string Note { get; set; }
 
-        public LeaveTypes() { }
-        public LeaveTypes(LeaveTypesVM leaveTypesVM)
+        public LeaveType() { }
+        public LeaveType(LeaveTypeVM leaveTypeVM)
         {
-            this.Name = leaveTypesVM.Name;
-            this.Value = leaveTypesVM.Value;
+            this.Name = leaveTypeVM.Name;
+            this.Duration = leaveTypeVM.Duration;
+            this.Note = leaveTypeVM.Note;
             this.CreateDate = DateTimeOffset.Now.ToLocalTime();
         }
 
-        public void Update(LeaveTypesVM leaveTypesVM)
+        public void Update(LeaveTypeVM leaveTypeVM)
         {
-            this.Name = leaveTypesVM.Name;
-            this.Value = leaveTypesVM.Value;
+            this.Name = leaveTypeVM.Name;
+            this.Duration = leaveTypeVM.Duration;
+            this.Note = leaveTypeVM.Note;
             this.UpdateDate = DateTimeOffset.Now.ToLocalTime();
         }
 

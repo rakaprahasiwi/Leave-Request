@@ -48,9 +48,8 @@ namespace BusinessLogic.Service.Application
 
         public bool Insert(LeaveRemainVM leaveRemainVM)
         {
-            if (string.IsNullOrWhiteSpace(leaveRemainVM.LeaveRequest_Id.ToString()) ||
-                string.IsNullOrWhiteSpace(leaveRemainVM.Employee_Id.ToString()) ||
-                string.IsNullOrWhiteSpace(leaveRemainVM.Duration.ToString()))
+            if (string.IsNullOrWhiteSpace(leaveRemainVM.Duration.ToString()) ||
+                string.IsNullOrWhiteSpace(leaveRemainVM.Employee_Id.ToString()))
             {
                 return false;
             }
@@ -62,9 +61,8 @@ namespace BusinessLogic.Service.Application
 
         public bool Update(int id, LeaveRemainVM leaveRemainVM)
         {
-            if (string.IsNullOrWhiteSpace(leaveRemainVM.LeaveRequest_Id.ToString()) ||
-                string.IsNullOrWhiteSpace(leaveRemainVM.Employee_Id.ToString()) ||
-                string.IsNullOrWhiteSpace(leaveRemainVM.Duration.ToString()))
+            if (string.IsNullOrWhiteSpace(leaveRemainVM.Duration.ToString()) ||
+                string.IsNullOrWhiteSpace(leaveRemainVM.Employee_Id.ToString()))
             {
                 return false;
             }

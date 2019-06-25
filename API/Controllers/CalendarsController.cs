@@ -15,110 +15,111 @@ using DataAccess.ViewModels;
 
 namespace API.Controllers
 {
-    public class LeaveTypesController : ApiController
+    public class CalendarsController : ApiController
     {
         private MyContext db = new MyContext();
-        private readonly ILeaveTypeService iLeaveTypesService;
 
-        public LeaveTypesController() { }
-        public LeaveTypesController(ILeaveTypeService _iLeaveTypesService)
+        private readonly ICalendarService iCalendarService;
+
+        public CalendarsController() { }
+        public CalendarsController(ICalendarService _iCalendarService)
         {
-            iLeaveTypesService = _iLeaveTypesService;
+            iCalendarService = _iCalendarService;
         }
 
-        // GET: api/LeaveTypes
-        public HttpResponseMessage GetLeaveTypes()
+        // GET: api/Calendars
+        public HttpResponseMessage GetCalendar()
         {
             try
             {
                 var message = Request.CreateErrorResponse(HttpStatusCode.NotFound, "404 : Data Not Found");
-                var result = iLeaveTypesService.Get();
+                var result = iCalendarService.Get();
                 if (result != null)
                 {
                     message = Request.CreateResponse(HttpStatusCode.OK, result);
                 }
                 return message;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "500 : Internal Server Error");
             }
-            
+
         }
 
-        // GET: api/LeaveTypes/5
-        public HttpResponseMessage GetLeaveType(int id)
+        // GET: api/Calendars/5
+        public HttpResponseMessage GetCalendar(int id)
         {
             try
             {
                 var message = Request.CreateErrorResponse(HttpStatusCode.NotFound, "404 : Data Not Found");
-                var result = iLeaveTypesService.Get(id);
+                var result = iCalendarService.Get(id);
                 if (result != null)
                 {
                     message = Request.CreateResponse(HttpStatusCode.OK, result);
                 }
                 return message;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "500 : Internal Server Error");
             }
-            
+
         }
 
-        // PUT: api/LeaveTypes/5
-        public HttpResponseMessage PutLeaveType(int id, LeaveTypeVM leaveTypesVM)
+        // PUT: api/Calendars/5
+        public HttpResponseMessage PutCalendar(int id, CalendarVM calendarVM)
         {
             try
             {
                 var message = Request.CreateErrorResponse(HttpStatusCode.NotFound, "404 : Data Not Found");
-                var result = iLeaveTypesService.Update(id, leaveTypesVM);
+                var result = iCalendarService.Update(id, calendarVM);
                 if (result)
                 {
-                    message = Request.CreateResponse(HttpStatusCode.OK, leaveTypesVM);
+                    message = Request.CreateResponse(HttpStatusCode.OK, calendarVM);
                 }
                 return message;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "500 : Internal Server Error");
             }
-            
+
         }
 
-        // POST: api/LeaveTypes
-        public HttpResponseMessage InsertLeaveType(LeaveTypeVM leaveTypesVM)
+        // POST: api/Calendars
+        public HttpResponseMessage InsertCalendar(CalendarVM calendarVM)
         {
             try
             {
                 var message = Request.CreateErrorResponse(HttpStatusCode.NotFound, "404 : Data Not Found");
-                var result = iLeaveTypesService.Insert(leaveTypesVM);
+                var result = iCalendarService.Insert(calendarVM);
                 if (result)
                 {
-                    message = Request.CreateResponse(HttpStatusCode.OK, leaveTypesVM);
+                    message = Request.CreateResponse(HttpStatusCode.OK, calendarVM);
                 }
                 return message;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "500 : Internal Server Error");
             }
         }
 
-        // DELETE: api/LeaveTypes/5
-        public HttpResponseMessage DeleteLeaveType(int id)
+        // DELETE: api/Calendars/5
+        public HttpResponseMessage DeleteCalendar(int id)
         {
             try
             {
                 var message = Request.CreateErrorResponse(HttpStatusCode.NotFound, "404 : Data Not Found");
-                var result = iLeaveTypesService.Delete(id);
+                var result = iCalendarService.Delete(id);
                 if (result)
                 {
                     message = Request.CreateResponse(HttpStatusCode.OK, "200 : OK (Data Deleted)");
                 }
                 return message;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "500 : Internal Server Error");
             }

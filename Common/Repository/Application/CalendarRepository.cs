@@ -10,9 +10,10 @@ using System.Data.Entity;
 
 namespace Common.Repository.Application
 {
-    public class StatusTypeParameterRepository : IStatusTypeParameterRepository
+    public class CalendarRepository : ICalendarRepository
     {
         MyContext myContext = new MyContext();
+        bool status = false;
 
         public bool Delete(int id)
         {
@@ -21,37 +22,34 @@ namespace Common.Repository.Application
             {
                 get.Delete();
                 myContext.Entry(get).State = EntityState.Modified;
-                var result = myContext.SaveChanges();
-                return result > 0;
+                myContext.SaveChanges();
+                status = true;
             }
-            else
-            {
-                return false;
-            }
+            return status;
         }
 
-        public List<StatusTypeParameter> Get()
+        public List<Calendar> Get()
         {
-            var get = myContext.StatusTypeParameters.Where(x => x.IsDelete == false).ToList();
+            var get = myContext.Calendars.Where(x => x.IsDelete == false).ToList();
             return get;
         }
 
-        public StatusTypeParameter Get(int id)
+        public Calendar Get(int id)
         {
-            var get = myContext.StatusTypeParameters.Find(id);
+            var get = myContext.Calendars.SingleOrDefault(x => x.Id == id);
             return get;
         }
 
-        public List<StatusTypeParameter> GetSearch(string values)
+        public List<Calendar> GetSearch(string values)
         {
-            var get = myContext.StatusTypeParameters.Where(x => (x.Name.Contains(values) || x.Id.ToString().Contains(values)) && x.IsDelete == false).ToList();
+            var get = myContext.Calendars.Where(x => (x.Name.Contains(values) || x.Id.ToString().Contains(values)) && x.IsDelete == false).ToList();
             return get;
         }
 
-        public bool Insert(StatusTypeParameterVM statusTypeParameterVM)
+        public bool Insert(CalendarVM calendarVM)
         {
-            var push = new StatusTypeParameter(statusTypeParameterVM);
-            myContext.StatusTypeParameters.Add(push);
+            var push = new Calendar(calendarVM);
+            myContext.Calendars.Add(push);
             var result = myContext.SaveChanges();
             if (result > 0)
             {
@@ -63,12 +61,12 @@ namespace Common.Repository.Application
             }
         }
 
-        public bool Update(int id, StatusTypeParameterVM statusTypeParameterVM)
+        public bool Update(int id, CalendarVM calendarVM)
         {
             var get = Get(id);
             if (get != null)
             {
-                get.Update(statusTypeParameterVM);
+                get.Update(calendarVM);
                 myContext.Entry(get).State = EntityState.Modified;
                 var result = myContext.SaveChanges();
                 return result > 0;
