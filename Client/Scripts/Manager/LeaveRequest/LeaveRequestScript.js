@@ -8,11 +8,12 @@
 
 function Save() {
     var leave_request = new Object();
-    leave_request.employee_id = $('#Employee_Id').val('1');
-    leave_request.manager_id = $('#Manager_Id').val('1');
+    leave_request.employee_id = $('#Employee_Id').val();
+    leave_request.manager_id = $('#Manager_Id').val();
     leave_request.LeaveType_Id = $('#LeaveType_Id').val();
     leave_request.reason = $('#Reason').val();
-    leave_request.request_date = $('#Request_Date').val(Date.Now());
+    leave_request.request_date = $('#Request_Date').val();
+    debugger;
     leave_request.from_date = $('#From_Date').val();
     leave_request.end_date = $('#End_Date').val();
     leave_request.attachment = $('#Attachment').val();
@@ -69,6 +70,7 @@ function LoadIndexLeaveRequest() {
                         html += '<td>' + val.Attachment + '</td>';
                         html += '<td>' + val.Status + '</td>';
                         html += '<td>' + '<Button href = "#" class="btn btn-info" onclick="return GetById(' + val.Id + ')"><i class="fa fa-pencil"></i></button>';
+                        debugger;
                         html += ' <Button href="#" class="btn btn-danger" onclick="return Delete(' + val.Id + ')"><i class="fa fa-trash"></i></Button></td>';
                         html += '</tr>';
                         i++;
@@ -124,12 +126,12 @@ function GetById(Id) {
             $('#Manager_Id').val(result.Manager_Id);
             $('#LeaveType_Id').val(result.LeaveType_Id);
             $('#Reason').val(result.Reason);
-            $('#Request_Date').val(moment(val.Request_Date).format("MM/DD/YYYY"));
-            $('#From_Date').val(moment(val.From_Date).format("MM/DD/YYYY"));
-            $('#End_Date').val(moment(val.End_Date).format("MM/DD/YYYY"));
+            $('#Request_Date').val(moment(result.Request_Date).format("MM/DD/YYYY"));
+            $('#From_Date').val(moment(result.From_Date).format("MM/DD/YYYY"));
+            $('#End_Date').val(moment(result.End_Date).format("MM/DD/YYYY"));
             $('#Attachment').val(result.Attachment);
             $('#Status').val(result.Status);
-
+            debugger;
             $('#myModal').modal('show');
             $('#Update').show();
             $('#Save').hide();
