@@ -6,21 +6,22 @@
 
 <div class="card">
     <div class="card-body">
+        <hr />
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="ClearScreen();">Create New</button><br /><br />
         <table class="table table-bordered table-striped dataTable no-footer" role="grid" aria-describedby="myTable_info" id="tableLeaveRequest">
             <thead>
                 <tr>
                     <th>NO.</th>
-                    <th>REQUEST DATE</th>
-                    <th>FROM DATE</th>
-                    <th>END DATE</th>
-                    <th>EMPLOYEE ID</th>
-                    <th>ATTACHMENT</th>
-                    <th>MANAGER ID</th>
-                    <th>LEAVE TYPE ID</th>
+                    <th>EMPLOYEE</th>
+                    <th>MANAGER</th>
+                    <th>LEAVE TYPE</th>
                     <th>REASON</th>
-                    <th>STATUS ID</th>
-                    <th>ACTION</th> 
+                    <th>REQUEST DATE</th>
+                    <th>LEAVE DATE</th>
+                    <th>END DATE</th>
+                    <th>ATTACHMENT</th>
+                    <th>STATUS</th>
+                    <th>ACTION</th>
                 </tr>
             </thead>
             <tbody class="tbody"></tbody>
@@ -33,7 +34,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">×</button>
-                <h4 class="modal-title" id="myModalLabel">Calendar Form</h4>
+                <h4 class="modal-title" id="myModalLabel">Leave Type Form</h4>
             </div>
             <div class="modal-body">
                 <form>
@@ -47,17 +48,27 @@
                             <div class="input-group-addon">
                                 <span class="icon datepaginator"></span>
                             </div>
-                            <input id="National_Date" class="form-control datepicker" placeholder="Insert date" type="text">
+                            <input id="From_Date" class="form-control datepicker" placeholder="Insert From Date" type="text">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="">Date</label>
+                        <label for="">End Date</label>
                         <div class="input-group date">
                             <div class="input-group-addon">
                                 <span class="icon datepaginator"></span>
                             </div>
-                            <input id="National_Date" class="form-control datepicker" placeholder="Insert date" type="text">
+                            <input id="End_Date" class="form-control datepicker" placeholder="Insert End Date" type="text">
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Leave_Type">Leave Type</label>
+                        <select id="Leave_Type" class="pc form-control">
+                            <option>Select Leave Type</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Reason">Reason</label>
+                        <textarea type="text" rows="5" class="form-control" id="Reason" placeholder="Reason"></textarea>
                     </div>
                 </form>
             </div>
@@ -70,15 +81,26 @@
     </div>
 </div>
 
-    @section Scripts{
-        <script src="~/Content/jquery/jquery.min.js"></script>
-        <script src="~/Content/sweetalert/sweetalert.min.js"></script>
-        <link href="~/Content/sweetalert/sweetalert.css" rel="stylesheet" />
-        <script src="~/Content/datatables/jquery.dataTables.min.js"></script>
-        <link href="~/Content/datatables/jquery.dataTables.min.css" rel="stylesheet" />
-        <script src="~/Scripts/Manager/LeaveRequest/LeaveRequestScript.js"></script>
-        <script src="~/Content/assets/js/moment.js"></script>
-        <script src="~/Content/assets/js/moment-with-locales.js"></script>
-        @Scripts.Render("~/bundles/jqueryval")
-    }
+@section Scripts{
+    <script src="~/Content/jquery/jquery.min.js"></script>
+    <script src="~/Content/sweetalert/sweetalert.min.js"></script>
+    <link href="~/Content/sweetalert/sweetalert.css" rel="stylesheet" />
+    <script src="~/Content/datatables/jquery.dataTables.min.js"></script>
+    <link href="~/Content/datatables/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="~/Scripts/Manager/LeaveRequest/LeaveRequestScript.js"></script>
+    <script src="~/Content/assets/js/moment.js"></script>
+    <script src="~/Content/assets/js/moment-with-locales.js"></script>
+    <script src="~/Content/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <link href="~/Content/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <script type="text/javascript">
+        $(function () {
+            $(".datepicker").datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true,
+            });
+        });
+    </script>
+    @Scripts.Render("~/bundles/jqueryval")
+}
 
