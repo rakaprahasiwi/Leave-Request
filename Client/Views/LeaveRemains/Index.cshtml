@@ -4,25 +4,59 @@
     ViewBag.Title = "Index";
 }
 
-<div class="container-fluid">
-    <hr />
-    <table class="table table-hover" id="tableLeaveType">
-        <thead>
-            <tr>
-                <th>NO.</th>
-                <th>EMPLOYEE ID</th>
-                <th>LEAVE REQUEST ID</th>
-                <th>DURATION</th>
-                <th>ACTION</th>
-            </tr>
-        </thead>
-        <tbody class="tbody"></tbody>
-    </table>
+<div class="card">
+    <div class="card-body">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="ClearScreen();">Create New</button><br /><br />
+        <table class="table table-bordered table-striped dataTable no-footer" role="grid" aria-describedby="myTable_info" id="tableLeaveRemain">
+            <thead>
+                <tr>
+                    <th>NO.</th>
+                    <th>BALANCE LEAVE</th>
+                    <th>EMPLOYEE</th>
+                    <th>ACTION</th>
+                </tr>
+            </thead>
+            <tbody class="tbody"></tbody>
+        </table>
+    </div>
 </div>
 
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title" id="myModalLabel">Leave Remain Form</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="Id">Id</label>
+                        <input type="text" class="form-control" id="Id" placeholder="Id" disabled="disabled" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Duration">Balance Leave</label>
+                        <input type="number" min="0" max="12" class="form-control" id="Duration" placeholder="Please Insert Balance Leave between 0-12" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Employee_Id">Employee</label>
+                        <input type="text" class="form-control" id="Employee_Id" placeholder="Employee"/>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="Save" onclick="Validate();">Add</button>
+                <button type="button" class="btn btn-primary" id="Update" style="display:none;" onclick="Validate();">Update</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section Scripts{
     <script src="~/Content/jquery/jquery.min.js"></script>
+    <script src="~/Content/assets/plugins/bootstrap/js/bootstrap.js"></script>
+    <script src="~/Content/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="~/Content/sweetalert/sweetalert.min.js"></script>
     <link href="~/Content/sweetalert/sweetalert.css" rel="stylesheet" />
     <script src="~/Content/datatables/jquery.dataTables.min.js"></script>
