@@ -28,78 +28,72 @@
     </div>
 </div>
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">×</button>
-                <h4 class="modal-title" id="myModalLabel">Leave Request Form</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Leave Request Form</h4>
             </div>
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <label for="Id">Id</label>
+                        <label for="Id" class="control-label">Id:</label>
                         <input type="text" class="form-control" id="Id" placeholder="Id" disabled="disabled" />
                     </div>
                     <div class="form-group">
-                        <label for="">Request Date</label>
-                        <div class="input-group date">
-                            <div class="input-group-addon">
-                                <span class="icon datepaginator"></span>
-                            </div>
-                            <input id="Request_Date" class="form-control datepicker" type="text" disabled="disabled">
+                        <label for="Request_Date" class="control-label">Request Date:</label>
+                        <div class="input-group ">
+                            <input type="text" class="form-control complex-colorpicker" id="Request_Date" placeholder="Insert date" disabled="disabled">
+                            <span class="input-group-addon"><i class="icon-calender"></i></span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="">Start Date</label>
-                        <div class="input-group date">
-                            <div class="input-group-addon">
-                                <span class="icon datepaginator"></span>
-                            </div>
-                            <input id="From_Datee" class="form-control datepicker" placeholder="Insert start date" type="text">
+                        <label for="Start_Date" class="control-label">Start Date:</label>
+                        <div class="input-group">
+                            <input id="From_Datee" class="form-control complex-colorpicker" placeholder="Insert start date" type="text">
+                            <span class="input-group-addon"><i class="icon-calender"></i></span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="">End Date</label>
-                        <div class="input-group date">
-                            <div class="input-group-addon">
-                                <span class="icon datepaginator"></span>
-                            </div>
-                            <input id="End_Datee" class="form-control datepicker" placeholder="Insert End date" type="text">
+                        <label for="End_Date" class="control-label">End Date:</label>
+                        <div class="input-group">
+                            <input id="End_Datee" class="form-control complex-colorpicker" placeholder="Insert End date" type="text">
+                            <span class="input-group-addon"><i class="icon-calender"></i></span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="Employee">Employee</label>
+                        <label for="Employee" class="control-label">Employee:</label>
                         <input type="text" class="form-control" id="Employee" disabled="disabled" />
                     </div>
                     <div class="form-group">
-                        <label for="Manager">Manager</label>
+                        <label for="Manager" class="control-label">Manager:</label>
                         <input type="text" class="form-control" id="Manager" disabled="disabled" />
                     </div>
                     <div class="form-group">
-                        <label for="LeaveType_Id">Leave Type</label>
+                        <label for="LeaveType_Id" class="control-label">Leave Type:</label>
                         <select class="custom-select col-12" id="LeaveType_Id">
                             <option>Choose</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="Attachment">Attachment</label>
+                        <label for="Attachment" class="control-label">Attachment:</label>
                         <input type="text" class="form-control" id="Attachment" placeholder="Attachment" />
                     </div>
                     <div class="form-group">
-                        <label for="Reason">Reason</label>
+                        <label for="Reason" class="control-label">Reason:</label>
                         <textarea type="text" rows="5" class="form-control" id="Reason" placeholder="Reason"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="Status">Status</label>
+                        <label for="Status" class="control-label">Status:</label>
                         <input type="text" class="form-control" id="Status" disabled="disabled" />
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="Save" onclick="Validate();">Add</button>
-                <button type="button" class="btn btn-primary" id="Update" style="display:none;" onclick="Validate();">Update</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger waves-effect waves-light" id="Save" onclick="Validate();">Save</button>
+                <button type="button" class="btn btn-danger waves-effect waves-light" id="Update" style="display:none;" onclick="Validate();">Update</button>
             </div>
         </div>
     </div>
@@ -107,8 +101,16 @@
 
 @section Scripts{
     <script src="~/Content/jquery/jquery.min.js"></script>
+<script src="~/Content/assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="~/Content/assets/plugins/bootstrap/js/bootstrap.js"></script>
     <script src="~/Content/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="~/Content/assets/js/jquery.slimscroll.js"></script>
+    <script src="~/Content/assets/js/waves.js"></script>
+    <script src="~/Content/assets/js/sidebarmenu.js"></script>
+    <script src="~/Content/assets/plugins/sticky-kit-master/dist/sticky-kit.js"></script>
+    <script src="~/Content/assets/js/custom.min.js"></script>
+
     <script src="~/Content/sweetalert/sweetalert.min.js"></script>>
     <link href="~/Content/sweetalert/sweetalert.css" rel="stylesheet" />
     <script src="~/Content/datatables/jquery.dataTables.min.js"></script>
@@ -127,6 +129,13 @@
                 autoclose: true,
                 todayHighlight: true
         });
+        });
+    </script>
+    <script>
+        jQuery('.complex-colorpicker').datepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            todayHighlight: true
         });
     </script>
     <script type="text/javascript">
