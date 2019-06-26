@@ -47,10 +47,8 @@ namespace Client.Controllers
 
         public void InsertOrUpdate(LeaveRequestVM leaveRequestVM)
         {
-            var client = new HttpClient
-            {
-                BaseAddress = new Uri(get.link)
-            };
+            var client = new HttpClient();
+            client.BaseAddress = new Uri(get.link);
             var myContent = JsonConvert.SerializeObject(leaveRequestVM);
             var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
             var byteContent = new ByteArrayContent(buffer);

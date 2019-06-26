@@ -3,27 +3,53 @@
     $('#tableLeaveRequest').DataTable({
         "ajax": LoadIndexLeaveRequest()
     })
-    ClearScreen();
 })
 
-function Save() {
-    var leave_request = new Object();
-    leave_request.employee_id = $('#Employee_Id').val();
-    leave_request.manager_id = $('#Manager_Id').val();
-    leave_request.LeaveType_Id = $('#LeaveType_Id').val();
-    leave_request.reason = $('#Reason').val();
-    leave_request.request_date = $('#Request_Date').val();
-    debugger;
-    leave_request.from_date = $('#From_Date').val();
-    leave_request.end_date = $('#End_Date').val();
-    leave_request.attachment = $('#Attachment').val();
-    leave_request.status = $('#Status').val('Submited');
-    console.log(leave_request);
+function LoadIndexLeaveRequest() {
     $.ajax({
-        url: "/LeaveRequests/InsertOrUpdate/",
-        type: 'POST',
-        dataType: 'json',
-        data: leave_request,
+        type: "GET",
+        async: false,
+        url: "/LeaveRequests/LoadLeaveRequest/", //shoot to controller client LeaveTypessController
+        dataType: "json",
+        success: function (data) {
+            var html = '';
+            var i = 1;
+            $.each(data, function (index, val) {
+                html += '<tr>';
+                html += '<td>' + i + '</td>';
+                html += '<td>' + moment(val.Request_Date).format("YYYY-MM-DD") + '</td>';
+                html += '<td>' + moment(val.From_Date).format("YYYY-MM-DD") + '</td>';
+                html += '<td>' + moment(val.End_Date).format("YYYY-MM-DD") + '</td>';
+                html += '<td>' + val.Employee_Id + '</td>';
+                html += '<td>' + val.Manager_Id + '</td>';
+                html += '<td>' + val.LeaveType.Name + '</td>';
+                html += '<td>' + val.Attachment + '</td>';
+                html += '<td>' + val.Reason + '</td>';
+                html += '<td>' + val.Status + '</td>';
+                html += '<td>' + '<Button href = "#" class="btn btn-info" onclick="return GetById(' + val.Id + ')"><i class="fa fa-pencil"></i></button>';
+                html += ' <Button href="#" class="btn btn-danger" onclick="return Delete(' + val.Id + ')"><i class="fa fa-trash"></i></Button></td>';
+                html += '</tr>';
+                i++;
+            });
+            $('.tbody').html(html);
+        }
+    });
+}
+
+function Save() {
+    var leaveRequest = new Object();
+    leaveRequest.Request_Date = $('#Request_Date').val();
+    leaveRequest.from_Date = $('#From_Datee').val();
+    leaveRequest.end_Date = $('#End_Datee').val();
+    leaveRequest.Employee_Id = $('#Employee').val();
+    leaveRequest.Manager_Id = $('#Manager').val();
+    leaveRequest.LeaveType_Id = $('#LeaveType_Id').val();
+    leaveRequest.Attachment = $('#Attachment').val();
+    leaveRequest.Reason = $('#Reason').val();
+    leaveRequest.Status = $('#Status').val();
+    $.ajax({
+        url: '/LeaveRequests/InsertOrUpdate/',
+        data: leaveRequest,
         success: function (result) {
             swal({
                 title: "Saved!",
@@ -36,67 +62,25 @@ function Save() {
             LoadIndexLeaveRequest();
             $('#myModal').modal('hide');
             ClearScreen();
-        },
-        error: function () {
-            $('#Update').hide();
-            $('#Save').show();
         }
     });
 };
 
-function LoadIndexLeaveRequest() {
-    $.ajax({
-        type: "GET",
-        async: false,
-        url: "/LeaveRequests/LoadLeaveRequest/", //shoot to controller client LeaveTypessController
-        dataType: "json",
-        success: function (data) {
-            var html = '';
-            var i = 1;
-            $.each(data, function (index, val) {
-                $.ajax({
-                    url: "/leaveTypes/GetById/",
-                    data: { id: val.LeaveType_Id },
-                    success: function (result) {
-                        html += '<tr>';
-                        html += '<td>' + i + '</td>';
-                        html += '<td>' + val.Employee_Id + '</td>';
-                        html += '<td>' + val.Manager_Id + '</td>';
-                        html += '<td>' + result.Name + '</td>';
-                        html += '<td>' + val.Reason + '</td>';
-                        html += '<td>' + moment(val.Request_Date).format("MM/DD/YYYY") + '</td>';
-                        html += '<td>' + moment(val.From_Date).format("MM/DD/YYYY") + '</td>';
-                        html += '<td>' + moment(val.End_Date).format("MM/DD/YYYY") + '</td>';
-                        html += '<td>' + val.Attachment + '</td>';
-                        html += '<td>' + val.Status + '</td>';
-                        html += '<td>' + '<Button href = "#" class="btn btn-info" onclick="return GetById(' + val.Id + ')"><i class="fa fa-pencil"></i></button>';
-                        debugger;
-                        html += ' <Button href="#" class="btn btn-danger" onclick="return Delete(' + val.Id + ')"><i class="fa fa-trash"></i></Button></td>';
-                        html += '</tr>';
-                        i++;
-                        $('.tbody').html(html);
-                    }
-                });;
-            });
-        }
-    });
-}
-
 function Edit() {
-    var leave_request = new Object();
-    leave_request.id = $('#Id').val();
-    leave_request.employee_id = $('#Employee_Id').val();
-    leave_request.manager_id = $('#Manager_Id').val();
-    leave_request.LeaveType_Id = $('#LeaveType_Id').val();
-    leave_request.reason = $('#Reason').val();
-    leave_request.request_date = $('#Request_Date').val();
-    leave_request.from_date = $('#From_Date').val();
-    leave_request.end_date = $('#End_Date').val();
-    leave_request.attachment = $('#Attachment').val();
-    leave_request.status = $('#Status').val();
+    var leaveRequest = new Object();
+    leaveRequest.id = $('#Id').val();
+    leaveRequest.Request_Date = $('#Request_Date').val();
+    leaveRequest.from_Date = $('#From_Datee').val();
+    leaveRequest.end_Date = $('#End_Datee').val();
+    leaveRequest.Employee_Id = $('#Employee').val();
+    leaveRequest.Manager_Id = $('#Manager').val();
+    leaveRequest.LeaveType_Id = $('#LeaveType_Id').val();
+    leaveRequest.Attachment = $('#Attachment').val();
+    leaveRequest.Reason = $('#Reason').val();
+    leaveRequest.Status = $('#Status').val();
     $.ajax({
         url: "/LeaveRequests/InsertOrUpdate/",
-        data: leave_request,
+        data: leaveRequest,
         success: function (result) {
             swal({
                 title: "Saved!",
@@ -120,24 +104,60 @@ function GetById(Id) {
         dataType: "json",
         data: { id: Id },
         success: function (result) {
-            console.log(result);
             $('#Id').val(result.Id);
-            $('#Employee_Id').val(result.Employee_Id);
-            $('#Manager_Id').val(result.Manager_Id);
+            $('#Request_Date').val(moment(result.Request_Date).format("YYYY-MM-DD"));
+            $('#From_Datee').val(moment(result.From_Date).format("YYYY-MM-DD"));
+            $('#End_Datee').val(moment(result.End_Date).format("YYYY-MM-DD"));
+            $('#Employee').val(result.Employee_Id);
+            $('#Manager').val(result.Manager_Id);
             $('#LeaveType_Id').val(result.LeaveType_Id);
-            $('#Reason').val(result.Reason);
-            $('#Request_Date').val(moment(result.Request_Date).format("MM/DD/YYYY"));
-            $('#From_Date').val(moment(result.From_Date).format("MM/DD/YYYY"));
-            $('#End_Date').val(moment(result.End_Date).format("MM/DD/YYYY"));
             $('#Attachment').val(result.Attachment);
+            $('#Reason').val(result.Reason);
             $('#Status').val(result.Status);
-            debugger;
+            
             $('#myModal').modal('show');
             $('#Update').show();
             $('#Save').hide();
         }
     })
 }
+
+//function LoadIndexLeaveRequest() {
+//    $.ajax({
+//        type: "GET",
+//        async: false,
+//        url: "/LeaveRequests/LoadLeaveRequest/",
+//        dateType: "json",
+//        success: function (data) {
+//            var html = '';
+//            var i = 1;
+//            $.each(data, function (index, val) {
+//                $.ajax({
+//                    url: "/LeaveRequests/GetById/",
+//                    data: { id: val.LeaveType_Id },
+//                    success: function (result) {
+//                        html += '<tr>';
+//                        html += '<td>' + i + '</td>';
+//                        html += '<td>' + val.Request_Date + '</td>';
+//                        html += '<td>' + val.From_Date + '</td>';
+//                        html += '<td>' + val.End_Date + '</td>';
+//                        html += '<td>' + val.Employee_Id + '</td>';
+//                        html += '<td>' + val.Manager_Id + '</td>';
+//                        html += '<td>' + result.Name + '</td>';
+//                        html += '<td>' + val.Attachment + '</td>';
+//                        html += '<td>' + val.Reason + '</td>';
+//                        html += '<td>' + val.Status + '</td>';
+//                        html += '<td> <Button href="#" class="btn btn-info" onclick="return GetById(' + val.Id + ')"><i class="fa fa-pencil"></i></Button>';
+//                        html += ' <Button href="#" class="btn btn-danger" onclick="return Delete(' + val.Id + ')"><i class="fa fa-trash"></i></Button> </td>';
+//                        html += '</tr>';
+//                        i++;
+//                        $('.tbody').html(html);
+//                    }
+//                });
+//            });
+//        }
+//    });
+//}
 
 function Delete(Id) {
     swal({
@@ -170,11 +190,12 @@ function Delete(Id) {
 }
 
 function ClearScreen() {
-    $('#Id').val('');
-    $('#LeaveType_Id').val('Select Leave Type');
-    $('#Reason').val('');
     $('#From_Date').val('');
     $('#End_Date').val('');
+    $('#Id').val('');
+    $('#LeaveType_Id').val(0);
+    $('#Attachment').val('');
+    $('#Reason').val('');
     $('#Update').hide();
     $('#Save').show();
 }
@@ -187,16 +208,16 @@ function LoadLeaveType(element) {
             url: "/LeaveTypes/LoadLeaveType/",
             success: function (data) {
                 LeaveTypes = data;
-                renderType(element);
+                renderLeaveType(element);
             }
         })
     }
     else {
-        renderType(element);
+        renderLeaveType(element);
     }
 }
 
-function renderType(element) {
+function renderLeaveType(element) {
     var $ele = $(element);
     $ele.empty();
     $ele.append($('<option/>').val('0').text('Select Leave Type'));
@@ -209,10 +230,28 @@ $('#Update').hide();
 $('#Save').show();
 ClearScreen();
 
-
 function Validate() {
-
-    if ($('#Id').val() == " " || $('#Id').val() == "")
+    if ($('#From_Date').val() == "" || $('#From_Date').val() == " ")
+    {
+        swal("Oops", "Please Insert Start Date", "error")
+    } 
+    else if ($('#End_Date').val() == "" || $('#End_Date').val() == " ")
+    {
+        swal("Oops", "Please Insert End Date", "error")
+    } 
+    else if ($('#LeaveType_Id').val() == 0 || $('#LeaveType_Id').val() == "Select Leave Type")
+    {
+        swal("Oops", "Expected Leave Type", "error")
+    } 
+    else if ($('#Attachment').val() == "" || $('#Attachment').val() == " ")
+    {
+        swal("Oops", "Expected Note", "error")
+    }
+    else if ($('#Reason').val() == "" || $('#Reason').val() == " ")
+    {
+        swal("Oops", "Expected Reaspn", "error")
+    }
+    else if ($('#Id').val() == "" || $('#Id').val() == " ")
     {
         Save();
     }

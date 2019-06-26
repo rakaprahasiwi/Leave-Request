@@ -4145,11 +4145,11 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\LeaveTypes\Index.cshtml" />
     <Content Include="Views\Shared\AdminLayout\_LayoutAdministrator.cshtml" />
-    <Content Include="Views\LeaveRequests\Index.cshtml" />
     <Content Include="Views\LeaveRemains\Index.cshtml" />
     <Content Include="Views\Home\Dashboard.cshtml" />
     <Content Include="Views\Shared\UserLayout\_LayoutUser.cshtml" />
     <Content Include="Views\Calendars\Index.cshtml" />
+    <Content Include="Views\LeaveRequests\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
