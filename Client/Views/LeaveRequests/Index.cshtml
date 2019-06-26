@@ -4,41 +4,81 @@
     ViewBag.Title = "Index";
 }
 
-<head>
-    
-</head>
-<body>
-    <div class="container-fluid">
-        <table class="table table-hover" id="tableLeaveRequest">
+<div class="card">
+    <div class="card-body">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="ClearScreen();">Create New</button><br /><br />
+        <table class="table table-bordered table-striped dataTable no-footer" role="grid" aria-describedby="myTable_info" id="tableLeaveRequest">
             <thead>
                 <tr>
                     <th>NO.</th>
+                    <th>REQUEST DATE</th>
+                    <th>FROM DATE</th>
+                    <th>END DATE</th>
                     <th>EMPLOYEE ID</th>
+                    <th>ATTACHMENT</th>
                     <th>MANAGER ID</th>
                     <th>LEAVE TYPE ID</th>
                     <th>REASON</th>
-                    <th>REQUEST DATE</th>
-                    <th>LEAVE DATE</th>
-                    <th>END DATE</th>
-                    <th>ATTACHMENT</th>
                     <th>STATUS ID</th>
-                    <th>ACTION</th>
+                    <th>ACTION</th> 
                 </tr>
             </thead>
             <tbody class="tbody"></tbody>
         </table>
     </div>
-</body>
+</div>
 
-@section Scripts{
-    <script src="~/Content/jquery/jquery.min.js"></script>
-    <script src="~/Content/sweetalert/sweetalert.min.js"></script>
-    <link href="~/Content/sweetalert/sweetalert.css" rel="stylesheet" />
-    <script src="~/Content/datatables/jquery.dataTables.min.js"></script>
-    <link href="~/Content/datatables/jquery.dataTables.min.css" rel="stylesheet" />
-    <script src="~/Scripts/Manager/LeaveRequest/LeaveRequestScript.js"></script>
-    <script src="~/Content/assets/js/moment.js"></script>
-    <script src="~/Content/assets/js/moment-with-locales.js"></script>
-    @Scripts.Render("~/bundles/jqueryval")
-}
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title" id="myModalLabel">Calendar Form</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="Id">Id</label>
+                        <input type="text" class="form-control" id="Id" placeholder="Id" disabled="disabled" />
+                    </div>
+                    <div class="form-group">
+                        <label for="">From Date</label>
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <span class="icon datepaginator"></span>
+                            </div>
+                            <input id="National_Date" class="form-control datepicker" placeholder="Insert date" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Date</label>
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <span class="icon datepaginator"></span>
+                            </div>
+                            <input id="National_Date" class="form-control datepicker" placeholder="Insert date" type="text">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="Save" onclick="Validate();">Add</button>
+                <button type="button" class="btn btn-primary" id="Update" style="display:none;" onclick="Validate();">Update</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    @section Scripts{
+        <script src="~/Content/jquery/jquery.min.js"></script>
+        <script src="~/Content/sweetalert/sweetalert.min.js"></script>
+        <link href="~/Content/sweetalert/sweetalert.css" rel="stylesheet" />
+        <script src="~/Content/datatables/jquery.dataTables.min.js"></script>
+        <link href="~/Content/datatables/jquery.dataTables.min.css" rel="stylesheet" />
+        <script src="~/Scripts/Manager/LeaveRequest/LeaveRequestScript.js"></script>
+        <script src="~/Content/assets/js/moment.js"></script>
+        <script src="~/Content/assets/js/moment-with-locales.js"></script>
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 

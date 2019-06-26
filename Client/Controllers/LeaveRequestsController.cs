@@ -18,10 +18,10 @@ namespace Client.Controllers
         // GET: LeaveRequests
         public ActionResult Index()
         {
-            return View(LeaveRequest());
+            return View(LoadLeaveRequest());
         }
 
-        public JsonResult LeaveRequest()
+        public JsonResult LoadLeaveRequest()
         {
             IEnumerable<LeaveRequest> leaveRequest = null;
             var client = new HttpClient
@@ -57,11 +57,11 @@ namespace Client.Controllers
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             if (leaveRequestVM.Id.Equals(0))
             {
-                var result = client.PostAsync("LeaveRequest", byteContent).Result;
+                var result = client.PostAsync("LeaveRequests", byteContent).Result;
             }
             else
             {
-                var result = client.PostAsync("LeaveRequest/" + leaveRequestVM.Id, byteContent).Result;
+                var result = client.PutAsync("LeaveRequests/" + leaveRequestVM.Id, byteContent).Result;
             }
         }
 
@@ -72,7 +72,7 @@ namespace Client.Controllers
             {
                 BaseAddress = new Uri(get.link)
             };
-            var responseTask = client.GetAsync("LeaveRequest/" + id);
+            var responseTask = client.GetAsync("LeaveRequests/" + id);
             responseTask.Wait();
             var result = responseTask.Result;
             if (result.IsSuccessStatusCode)
@@ -94,7 +94,7 @@ namespace Client.Controllers
             {
                 BaseAddress = new Uri(get.link)
             };
-            var result = client.DeleteAsync("LeaveRequest/" + id).Result;
+            var result = client.DeleteAsync("LeaveRequests/" + id).Result;
         }
     }
 }
