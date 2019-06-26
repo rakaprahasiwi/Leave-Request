@@ -13,7 +13,6 @@ function Save() {
     leave_request.LeaveType_Id = $('#LeaveType_Id').val();
     leave_request.reason = $('#Reason').val();
     leave_request.request_date = $('#Request_Date').val();
-    debugger;
     leave_request.from_date = $('#From_Date').val();
     leave_request.end_date = $('#End_Date').val();
     leave_request.attachment = $('#Attachment').val();
@@ -208,6 +207,12 @@ LoadLeaveType($('#LeaveType_Id'));
 $('#Update').hide();
 $('#Save').show();
 ClearScreen();
+
+function today() {
+    var Request_Date = document.querySelector(Request_Date);
+    var today = new Date();
+    Request_Date.value = today.toISOString().substr(0, 10);
+}
 
 
 function Validate() {
