@@ -68,8 +68,7 @@ function LoadIndexLeaveRequest() {
                         html += '<td>' + moment(val.End_Date).format("MM/DD/YYYY") + '</td>';
                         html += '<td>' + val.Attachment + '</td>';
                         html += '<td>' + val.Status + '</td>';
-                        html += '<td>' + '<Button href = "#" class="btn btn-info" onclick="return GetById(' + val.Id + ')"><i class="fa fa-pencil"></i></button>';
-                        debugger;
+                        html += '<td>' + '<Button href = "#" class="btn btn-info" onclick="return GetById(' + val.Id + ')"><i class="fa fa-pencil"></i></Button>';
                         html += ' <Button href="#" class="btn btn-danger" onclick="return Delete(' + val.Id + ')"><i class="fa fa-trash"></i></Button></td>';
                         html += '</tr>';
                         i++;
@@ -112,6 +111,7 @@ function Edit() {
     });
 };
 
+
 function GetById(Id) {
     $.ajax({
         url: "/LeaveRequests/GetById/",
@@ -119,7 +119,6 @@ function GetById(Id) {
         dataType: "json",
         data: { id: Id },
         success: function (result) {
-            console.log(result);
             $('#Id').val(result.Id);
             $('#Employee_Id').val(result.Employee_Id);
             $('#Manager_Id').val(result.Manager_Id);
@@ -130,7 +129,6 @@ function GetById(Id) {
             $('#End_Date').val(moment(result.End_Date).format("MM/DD/YYYY"));
             $('#Attachment').val(result.Attachment);
             $('#Status').val(result.Status);
-            debugger;
             $('#myModal').modal('show');
             $('#Update').show();
             $('#Save').hide();
@@ -172,6 +170,7 @@ function ClearScreen() {
     $('#Id').val('');
     $('#LeaveType_Id').val('Select Leave Type');
     $('#Reason').val('');
+    $('#Attachment').val('');
     $('#From_Date').val('');
     $('#End_Date').val('');
     $('#Update').hide();
@@ -216,8 +215,27 @@ function today() {
 
 
 function Validate() {
-
-    if ($('#Id').val() == " " && $('#Request_Date').val() == "")
+    if ($('#From_Date').val() == "" || $('#From_Date').val() == " ")
+    {
+        swal("Oops", "Please Choose From Date", "error")
+    }
+    else if ($('#End_Date').val() == "" || $('#End_Date').val() == " ")
+    {
+        swal("Oops", "Please Choose End Date", "error")
+    }
+    else if ($('#Leave_Type').val() == "" || $('#Leave_Type').val() == " ")
+    {
+        swal("Oops", "Please Choose Leave Type", "error")
+    }
+    else if ($('#Reason').val() == "" || $('#Reason').val() == " ")
+    {
+        swal("Oops", "Please Insert Reason", "error")
+    }
+    else if ($('#Attachment').val() == "" || $('#Attachment').val() == " ")
+    {
+        swal("Oops", "Please Insert Attachment", "error")
+    }
+    else if ($('#Id').val() == "")
     {
         Save();
     }
