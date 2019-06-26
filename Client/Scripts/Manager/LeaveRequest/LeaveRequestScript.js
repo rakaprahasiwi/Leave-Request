@@ -7,15 +7,15 @@
 
 function Save() {
     var leave_request = new Object();
-    leave_request.employee_Id = $('#Employee_Id').val();
-    leave_request.manager_Id = $('#Manager_Id').val();
-    leave_request.LeaveTypes_Id = $('#LeaveTypes_Id').val();
+    leave_request.employee_Id = $('1').val();
+    leave_request.manager_Id = $('2').val();
+    leave_request.LeaveTypes_Id = $('#Leave_Type').val();
     leave_request.reason = $('#Reason').val();
     leave_request.requestDate = $('#Request_Date').val();
     leave_request.fromDate = $('#From_Date').val();
     leave_request.endDate = $('#End_Date').val();
-    leave_request.attachment = $('#Attachment').val();
-    leave_request.status = $('#Status').val();
+    leave_request.attachment = $('file').val();
+    leave_request.status = $('Submitted').val();
     $.ajax({
         url: "/LeaveRequests/InsertOrUpdate/",
         data: leave_request,
@@ -71,7 +71,7 @@ function Edit() {
     leave_request.id = $('#Id').val();
     leave_request.employee_Id = $('#Employee_Id').val();
     leave_request.manager_Id = $('#Manager_Id').val();
-    leave_request.LeaveTypes_Id = $('#LeaveTypes_Id').val();
+    leave_request.LeaveTypes_Id = $('#LeaveTypes').val();
     leave_request.reason = $('#Reason').val();
     leave_request.requestDate = $('#Request_Date').val();
     leave_request.fromDate = $('#From_Date').val();
@@ -106,7 +106,7 @@ function GetById(Id) {
             $('#Id').val(result.Id);
             $('#Employee_Id').val(result.Employee_Id);
             $('#Manager_Id').val(result.Manager_Id);
-            $('#LeaveTypes_Id').val(result.LeaveTypes.Name);
+            $('#LeaveTypes').val(result.LeaveTypes.Name);
             $('#Reason').val(result.Reason);
             $('#Request_Date').val(moment(val.Request_Date).format("MM/DD/YYYY"));
             $('#From_Date').val(moment(val.From_Date).format("MM/DD/YYYY"));
