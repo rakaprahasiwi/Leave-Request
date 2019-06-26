@@ -126,7 +126,7 @@ function GetById(Id) {
             $('#Manager_Id').val(result.Manager_Id);
             $('#LeaveType_Id').val(result.LeaveType_Id);
             $('#Reason').val(result.Reason);
-            $('#Request_Date').val(moment(result.CreateDate).format("MM/DD/YYYY"));
+            $('#Request_Date').val(moment(result.Request_Date).format("MM/DD/YYYY"));
             $('#From_Date').val(moment(result.From_Date).format("MM/DD/YYYY"));
             $('#End_Date').val(moment(result.End_Date).format("MM/DD/YYYY"));
             $('#Attachment').val(result.Attachment);
@@ -212,7 +212,7 @@ ClearScreen();
 
 function Validate() {
 
-    if ($('#Id').val() == " " && $('#Request_Date').val() == "")
+    if ($('#Id').val() == " " || $('#Id').val() == "")
     {
         Save();
     }

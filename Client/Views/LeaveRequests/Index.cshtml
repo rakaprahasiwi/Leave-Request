@@ -42,7 +42,7 @@
                         <input type="text" class="form-control" id="Id" placeholder="Id" disabled="disabled" />
                         <input type="number" class="form-control" style="display:none;" value="1" id="Employee_Id"/>
                         <input type="number" class="form-control" style="display:none;" value="1" id="Manager_Id" />
-                        <input type="text" class="form-control" style="display:none;" value="Submited" id="Status" />
+                        <input type="text" class="form-control" style="display:none;"  id="Status" />
                     </div>
                     <div class="form-group">
                         <label for="">Start Date</label>
@@ -60,6 +60,7 @@
                                 <span class="icon datepaginator"></span>
                             </div>
                             <input id="End_Date" class="form-control datepicker" placeholder="Insert End date" type="text">
+                            <input id="Request_Date" class="form-control datepicker" style="display:none;" type="text">   
                         </div>
                     </div>
                     <div class="form-group">
@@ -110,6 +111,12 @@
                   todayHighlight: true
           });
          });
+    </script>
+    <script type="text/javascript">
+        var date = new Date();
+        var Request_Date = date.toISOString().slice(0, 10);
+
+        document.getElementById('Request_Date').value = Request_Date;
     </script>
     <script src="~/Scripts/Manager/LeaveRequest/LeaveRequestScript.js"></script>
     
