@@ -3,21 +3,25 @@
     $('#tableLeaveRequest').DataTable({
         "ajax": LoadIndexLeaveRequest()
     })
+    ClearScreen();
 })
 
 function Save() {
     var leave_request = new Object();
-    leave_request.employee_Id = $('1').val();
-    leave_request.manager_Id = $('2').val();
-    leave_request.LeaveTypes_Id = $('#Leave_Type').val();
+    leave_request.employee_id = $('#Employee_Id').val('1');
+    leave_request.manager_id = $('#Manager_Id').val('1');
+    leave_request.LeaveType_Id = $('#LeaveType_Id').val();
     leave_request.reason = $('#Reason').val();
-    leave_request.requestDate = $('#Request_Date').val();
-    leave_request.fromDate = $('#From_Date').val();
-    leave_request.endDate = $('#End_Date').val();
-    leave_request.attachment = $('file').val();
-    leave_request.status = $('Submitted').val();
+    leave_request.request_date = $('#Request_Date').val(Date.Now());
+    leave_request.from_date = $('#From_Date').val();
+    leave_request.end_date = $('#End_Date').val();
+    leave_request.attachment = $('#Attachment').val();
+    leave_request.status = $('#Status').val('Submited');
+    console.log(leave_request);
     $.ajax({
         url: "/LeaveRequests/InsertOrUpdate/",
+        type: 'POST',
+        dataType: 'json',
         data: leave_request,
         success: function (result) {
             swal({
@@ -31,6 +35,10 @@ function Save() {
             LoadIndexLeaveRequest();
             $('#myModal').modal('hide');
             ClearScreen();
+        },
+        error: function () {
+            $('#Update').hide();
+            $('#Save').show();
         }
     });
 };
@@ -45,38 +53,45 @@ function LoadIndexLeaveRequest() {
             var html = '';
             var i = 1;
             $.each(data, function (index, val) {
-                html += '<tr>';
-                html += '<td>' + i + '</td>';
-                html += '<td>' + val.Employee_Id + '</td>';
-                html += '<td>' + val.Manager_Id + '</td>';
-                html += '<td>' + val.LeaveType.Name + '</td>';
-                html += '<td>' + val.Reason + '</td>';
-                html += '<td>' + moment(val.Request_Date).format("MM/DD/YYYY") + '</td>';
-                html += '<td>' + moment(val.From_Date).format("MM/DD/YYYY") + '</td>';
-                html += '<td>' + moment(val.End_Date).format("MM/DD/YYYY") + '</td>';
-                html += '<td>' + val.Attachment + '</td>';
-                html += '<td>' + val.Status + '</td>';
-                html += '<td>' + '<Button href = "#" class="btn btn-info" onclick="return GetById(' + val.Id + ')"><i class="fa fa-pencil"></i></button>';
-                html += ' <Button href="#" class="btn btn-danger" onclick="return Delete(' + val.Id + ')"><i class="fa fa-trash"></i></Button></td>';
-                html += '</tr>';
-                i++;
+                $.ajax({
+                    url: "/leaveTypes/GetById/",
+                    data: { id: val.LeaveType_Id },
+                    success: function (result) {
+                        html += '<tr>';
+                        html += '<td>' + i + '</td>';
+                        html += '<td>' + val.Employee_Id + '</td>';
+                        html += '<td>' + val.Manager_Id + '</td>';
+                        html += '<td>' + result.Name + '</td>';
+                        html += '<td>' + val.Reason + '</td>';
+                        html += '<td>' + moment(val.Request_Date).format("MM/DD/YYYY") + '</td>';
+                        html += '<td>' + moment(val.From_Date).format("MM/DD/YYYY") + '</td>';
+                        html += '<td>' + moment(val.End_Date).format("MM/DD/YYYY") + '</td>';
+                        html += '<td>' + val.Attachment + '</td>';
+                        html += '<td>' + val.Status + '</td>';
+                        html += '<td>' + '<Button href = "#" class="btn btn-info" onclick="return GetById(' + val.Id + ')"><i class="fa fa-pencil"></i></button>';
+                        html += ' <Button href="#" class="btn btn-danger" onclick="return Delete(' + val.Id + ')"><i class="fa fa-trash"></i></Button></td>';
+                        html += '</tr>';
+                        i++;
+                        $('.tbody').html(html);
+                    }
+                });;
             });
-            $('.tbody').html(html);
         }
-    })
+    });
 }
 
 function Edit() {
     var leave_request = new Object();
     leave_request.id = $('#Id').val();
-    leave_request.employee_Id = $('#Employee_Id').val();
-    leave_request.manager_Id = $('#Manager_Id').val();
-    leave_request.LeaveTypes_Id = $('#LeaveTypes').val();
+    leave_request.employee_id = $('#Employee_Id').val();
+    leave_request.manager_id = $('#Manager_Id').val();
+    leave_request.LeaveType_Id = $('#LeaveType_Id').val();
     leave_request.reason = $('#Reason').val();
-    leave_request.requestDate = $('#Request_Date').val();
-    leave_request.fromDate = $('#From_Date').val();
-    leave_request.endDate = $('#End_Date').val();
+    leave_request.request_date = $('#Request_Date').val();
+    leave_request.from_date = $('#From_Date').val();
+    leave_request.end_date = $('#End_Date').val();
     leave_request.attachment = $('#Attachment').val();
+    leave_request.status = $('#Status').val();
     $.ajax({
         url: "/LeaveRequests/InsertOrUpdate/",
         data: leave_request,
@@ -103,10 +118,11 @@ function GetById(Id) {
         dataType: "json",
         data: { id: Id },
         success: function (result) {
+            console.log(result);
             $('#Id').val(result.Id);
             $('#Employee_Id').val(result.Employee_Id);
             $('#Manager_Id').val(result.Manager_Id);
-            $('#LeaveTypes').val(result.LeaveTypes.Name);
+            $('#LeaveType_Id').val(result.LeaveType_Id);
             $('#Reason').val(result.Reason);
             $('#Request_Date').val(moment(val.Request_Date).format("MM/DD/YYYY"));
             $('#From_Date').val(moment(val.From_Date).format("MM/DD/YYYY"));
@@ -153,7 +169,7 @@ function Delete(Id) {
 
 function ClearScreen() {
     $('#Id').val('');
-    $('#Leave_Type').val('');
+    $('#LeaveType_Id').val('Select Leave Type');
     $('#Reason').val('');
     $('#From_Date').val('');
     $('#End_Date').val('');
@@ -162,11 +178,11 @@ function ClearScreen() {
 }
 
 var LeaveTypes = []
-function LoadLeaveTypes(element) {
+function LoadLeaveType(element) {
     if (LeaveTypes.length == 0) {
         $.ajax({
             type: "GET",
-            url: "/LeaveTypes/LoadLeaveTypes/",
+            url: "/LeaveTypes/LoadLeaveType/",
             success: function (data) {
                 LeaveTypes = data;
                 renderType(element);
@@ -181,19 +197,20 @@ function LoadLeaveTypes(element) {
 function renderType(element) {
     var $ele = $(element);
     $ele.empty();
-    $ele.append($('<option/>').val('0').text('Select Type'));
+    $ele.append($('<option/>').val('0').text('Select Leave Type'));
     $.each(LeaveTypes, function (i, val) {
         $ele.append($('<option/>').val(val.Id).text(val.Name));
     })
 }
-LoadLeaveTypes($('#Leave_Type'));
+LoadLeaveType($('#LeaveType_Id'));
 $('#Update').hide();
 $('#Save').show();
 ClearScreen();
 
 
 function Validate() {
-    if ($('#Id').val() == " ")
+
+    if ($('#Id').val() == " " && $('#Request_Date').val() == "")
     {
         Save();
     }
