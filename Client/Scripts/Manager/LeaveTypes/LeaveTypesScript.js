@@ -140,7 +140,9 @@ function ClearScreen() {
 function Validate() {
     if ($('#Name').val() == "" || $('#Name').val() == " ") {
         swal("Oops", "Please Insert Name", "error")
-    } else if ($('#Duration').val() == 0 || $('#Duration').val() == " " || $('#Duration').val() == " ") {
+    } else if ($('#Duration').val() < 1 || $('#Duration').val() >100) {
+        swal("Oops", "Expected Value", "error")
+    }else if ($('#Duration').val() == "" || $('#Duration').val() == " ") {
         swal("Oops", "Expected Value", "error")
     } else if ($('#Note').val() == "Choose") {
         swal("Oops", "Expected Note", "error")
