@@ -54,14 +54,14 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Application\CalendarRepository.cs" />
     <Compile Include="Repository\Application\LeaveRemainRepository.cs" />
     <Compile Include="Repository\Application\LeaveRequestRepository.cs" />
-    <Compile Include="Repository\Application\LeaveTypesRepository.cs" />
-    <Compile Include="Repository\Application\StatusTypeParameterRepository.cs" />
+    <Compile Include="Repository\Application\LeaveTypeRepository.cs" />
+    <Compile Include="Repository\ICalendarRepository.cs" />
     <Compile Include="Repository\ILeaveRemainRepository.cs" />
     <Compile Include="Repository\ILeaveRequestRepository.cs" />
-    <Compile Include="Repository\ILeaveTypesRepository.cs" />
-    <Compile Include="Repository\IStatusTypeParameterRepository.cs" />
+    <Compile Include="Repository\ILeaveTypeRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

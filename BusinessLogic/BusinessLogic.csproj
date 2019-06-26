@@ -54,14 +54,14 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\Application\CalendarService.cs" />
     <Compile Include="Service\Application\LeaveRemainService.cs" />
     <Compile Include="Service\Application\LeaveRequestService.cs" />
-    <Compile Include="Service\Application\LeaveTypesService.cs" />
-    <Compile Include="Service\Application\StatusTypeParameterService.cs" />
+    <Compile Include="Service\Application\LeaveTypeService.cs" />
+    <Compile Include="Service\ICalendarService.cs" />
     <Compile Include="Service\ILeaveRemainService.cs" />
     <Compile Include="Service\ILeaveRequestService.cs" />
-    <Compile Include="Service\ILeaveTypesService.cs" />
-    <Compile Include="Service\IStatusTypeParameterService.cs" />
+    <Compile Include="Service\ILeaveTypeService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

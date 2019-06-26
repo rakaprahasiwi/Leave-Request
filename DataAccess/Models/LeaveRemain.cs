@@ -9,15 +9,11 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Models
 {
-    [Table("TB_T_LeaveRemain")]
+    [Table("TB_M_LeaveRemain")]
     public class LeaveRemain : BaseModel
     {
         public int Duration { get; set; }
         public int Employee_Id { get; set; }
-
-        [ForeignKey("LeaveRequest")]
-        public int LeaveRequest_Id { get; set; }
-        public LeaveRequest LeaveRequest { get; set; }
 
         public LeaveRemain() { }
 

@@ -48,15 +48,14 @@ namespace BusinessLogic.Service.Application
 
         public bool Insert(LeaveRequestVM leaveRequestVM)
         {
-            if (string.IsNullOrWhiteSpace(leaveRequestVM.LeaveTypes_Id.ToString()) ||
-                string.IsNullOrWhiteSpace(leaveRequestVM.Employee_Id.ToString()) ||
-                string.IsNullOrWhiteSpace(leaveRequestVM.Manager_Id.ToString()) ||
-                string.IsNullOrWhiteSpace(leaveRequestVM.StatusTypeParameter_Id.ToString()) ||
-                string.IsNullOrWhiteSpace(leaveRequestVM.Request_Date.ToString()) ||
+            if (string.IsNullOrWhiteSpace(leaveRequestVM.Request_Date.ToString()) ||
                 string.IsNullOrWhiteSpace(leaveRequestVM.From_Date.ToString()) ||
                 string.IsNullOrWhiteSpace(leaveRequestVM.End_Date.ToString()) ||
+                string.IsNullOrWhiteSpace(leaveRequestVM.Employee_Id.ToString())||
                 string.IsNullOrWhiteSpace(leaveRequestVM.Reason) ||
-                string.IsNullOrWhiteSpace(leaveRequestVM.Attachment))
+                string.IsNullOrWhiteSpace(leaveRequestVM.LeaveType_Id.ToString()) ||
+                string.IsNullOrWhiteSpace(leaveRequestVM.Status) ||
+                string.IsNullOrWhiteSpace(leaveRequestVM.Manager_Id.ToString()))
             {
                 return false;
             }
@@ -68,15 +67,14 @@ namespace BusinessLogic.Service.Application
 
         public bool Update(int id, LeaveRequestVM leaveRequestVM)
         {
-            if (string.IsNullOrWhiteSpace(leaveRequestVM.LeaveTypes_Id.ToString()) ||
-                string.IsNullOrWhiteSpace(leaveRequestVM.Employee_Id.ToString()) ||
-                string.IsNullOrWhiteSpace(leaveRequestVM.Manager_Id.ToString()) ||
-                string.IsNullOrWhiteSpace(leaveRequestVM.StatusTypeParameter_Id.ToString()) ||
-                string.IsNullOrWhiteSpace(leaveRequestVM.Request_Date.ToString()) ||
+            if (string.IsNullOrWhiteSpace(leaveRequestVM.Request_Date.ToString()) ||
                 string.IsNullOrWhiteSpace(leaveRequestVM.From_Date.ToString()) ||
                 string.IsNullOrWhiteSpace(leaveRequestVM.End_Date.ToString()) ||
+                string.IsNullOrWhiteSpace(leaveRequestVM.Employee_Id.ToString()) ||
                 string.IsNullOrWhiteSpace(leaveRequestVM.Reason) ||
-                string.IsNullOrWhiteSpace(leaveRequestVM.Attachment))
+                string.IsNullOrWhiteSpace(leaveRequestVM.LeaveType_Id.ToString()) ||
+                string.IsNullOrWhiteSpace(leaveRequestVM.Status) ||
+                string.IsNullOrWhiteSpace(leaveRequestVM.Manager_Id.ToString()))
             {
                 return false;
             }

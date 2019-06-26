@@ -1,0 +1,83 @@
+﻿
+@{
+    Layout = "~/Views/Shared/AdminLayout/_LayoutAdministrator.cshtml";
+    ViewBag.Title = "Index";
+}
+
+<div class="card">
+    <div class="card-body">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="ClearScreen();">Create New</button><br /><br />
+        <table class="table table-bordered table-striped dataTable no-footer" role="grid" aria-describedby="myTable_info" id="tableLeaveType">
+            <thead>
+                <tr>
+                    <th>NO.</th>
+                    <th>NAME</th>
+                    <th>DURATION</th>
+                    <th>NOTE</th>
+                    <th>ACTION</th>
+                </tr>
+            </thead>
+            <tbody class="tbody"></tbody>
+        </table>
+    </div>
+</div>
+
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Leave Type Form</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="Id" class="control-label">Id:</label>
+                        <input type="text" class="form-control" id="Id" placeholder="Id" disabled="disabled">
+                    </div>
+                    <div class="form-group">
+                        <label for="Name" class="control-label">Name:</label>
+                        <input type="text" class="form-control" id="Name" placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="Duration">Duration:</label>
+                        <input type="number" class="form-control" min="1" id="Duration" placeholder="Duration" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Note" class="control-label">Note:</label>
+                        <select class="custom-select col-12" id="Note">
+                            <option selected="">Choose</option>
+                            <option value="Special Leave">Special Leave</option>
+                            <option value="Normal Leave">Normal Leave</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger waves-effect waves-light" id="Save" onclick="Validate();">Save</button>
+                <button type="button" class="btn btn-danger waves-effect waves-light" id="Update" style="display:none;" onclick="Validate();">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/Content/jquery/jquery.min.js"></script>
+    <script src="~/Content/assets/plugins/bootstrap/js/popper.min.js"></script>
+    <script src="~/Content/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Content/assets/plugins/bootstrap/js/bootstrap.js"></script>>
+    <script src="~/Content/assets/js/jquery.slimscroll.js"></script>
+    <script src="~/Content/assets/js/waves.js"></script>
+    <script src="~/Content/assets/js/sidebarmenu.js"></script>
+    <script src="~/Content/assets/plugins/sticky-kit-master/dist/sticky-kit.js"></script>
+    <script src="~/Content/assets/js/custom.min.js"></script>
+    <script src="~/Content/sweetalert/sweetalert.min.js"></script>
+    <link href="~/Content/sweetalert/sweetalert.css" rel="stylesheet" />
+    <script src="~/Content/datatables/jquery.dataTables.min.js"></script>
+    <link href="~/Content/datatables/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="~/Scripts/Manager/LeaveTypes/LeaveTypesScript.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

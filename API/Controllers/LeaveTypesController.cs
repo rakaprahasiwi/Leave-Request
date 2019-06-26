@@ -18,10 +18,10 @@ namespace API.Controllers
     public class LeaveTypesController : ApiController
     {
         private MyContext db = new MyContext();
-        private readonly ILeaveTypesService iLeaveTypesService;
+        private readonly ILeaveTypeService iLeaveTypesService;
 
         public LeaveTypesController() { }
-        public LeaveTypesController(ILeaveTypesService _iLeaveTypesService)
+        public LeaveTypesController(ILeaveTypeService _iLeaveTypesService)
         {
             iLeaveTypesService = _iLeaveTypesService;
         }
@@ -67,7 +67,7 @@ namespace API.Controllers
         }
 
         // PUT: api/LeaveTypes/5
-        public HttpResponseMessage PutLeaveType(int id, LeaveTypesVM leaveTypesVM)
+        public HttpResponseMessage PutLeaveType(int id, LeaveTypeVM leaveTypesVM)
         {
             try
             {
@@ -87,7 +87,7 @@ namespace API.Controllers
         }
 
         // POST: api/LeaveTypes
-        public HttpResponseMessage InsertLeaveType(LeaveTypesVM leaveTypesVM)
+        public HttpResponseMessage InsertLeaveType(LeaveTypeVM leaveTypesVM)
         {
             try
             {

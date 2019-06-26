@@ -12,44 +12,44 @@ namespace DataAccess.Models
     [Table("TB_T_LeaveRequest")]
     public class LeaveRequest : BaseModel
     {
-        public DateTimeOffset From_Date { get; set; }
         public DateTimeOffset Request_Date { get; set; }
+        public DateTimeOffset From_Date { get; set; }
         public DateTimeOffset End_Date { get; set; }
-        public string Reason { get; set; }
-        public string Attachment { get; set; }
         public int Employee_Id { get; set; }
+        public string Attachment { get; set; }
+        public string Reason { get; set; }
         public int Manager_Id { get; set; }
+        public string Status { get; set; }
 
-        [ForeignKey("LeaveTypes")]
-        public int LeaveTypes_Id { get; set; }
-        public LeaveTypes LeaveTypes { get; set; }
-        [ForeignKey("StatusTypeParameter")]
-        public int StatusTypeParameter_Id { get; set; }
-        public StatusTypeParameter StatusTypeParameter { get; set; }
+        [ForeignKey("LeaveType")]
+        public int LeaveType_Id { get; set; }
+        public LeaveType LeaveType { get; set; }
 
         public LeaveRequest() { }
 
         public LeaveRequest(LeaveRequestVM leaveRequestVM)
         {
-            this.From_Date = leaveRequestVM.From_Date;
             this.Request_Date = leaveRequestVM.Request_Date;
+            this.From_Date = leaveRequestVM.From_Date;
             this.End_Date = leaveRequestVM.End_Date;
-            this.Reason = leaveRequestVM.Reason;
-            this.Attachment = leaveRequestVM.Attachment;
             this.Employee_Id = leaveRequestVM.Employee_Id;
+            this.Attachment = leaveRequestVM.Attachment;
+            this.Reason = leaveRequestVM.Reason;
             this.Manager_Id = leaveRequestVM.Manager_Id;
+            this.Status = leaveRequestVM.Status;
             this.CreateDate = DateTimeOffset.Now.ToLocalTime();
         }
 
         public void Update(LeaveRequestVM leaveRequestVM)
         {
-            this.From_Date = leaveRequestVM.From_Date;
             this.Request_Date = leaveRequestVM.Request_Date;
+            this.From_Date = leaveRequestVM.From_Date;
             this.End_Date = leaveRequestVM.End_Date;
-            this.Reason = leaveRequestVM.Reason;
-            this.Attachment = leaveRequestVM.Attachment;
             this.Employee_Id = leaveRequestVM.Employee_Id;
+            this.Attachment = leaveRequestVM.Attachment;
+            this.Reason = leaveRequestVM.Reason;
             this.Manager_Id = leaveRequestVM.Manager_Id;
+            this.Status = leaveRequestVM.Status;
             this.UpdateDate = DateTimeOffset.Now.ToLocalTime();
         }
 

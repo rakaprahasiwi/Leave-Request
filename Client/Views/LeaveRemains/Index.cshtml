@@ -1,0 +1,79 @@
+﻿
+@{
+    Layout = "~/Views/Shared/AdminLayout/_LayoutAdministrator.cshtml";
+    ViewBag.Title = "Index";
+}
+
+<div class="card">
+    <div class="card-body">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="ClearScreen();">Create New</button><br /><br />
+        <table class="table table-bordered table-striped dataTable no-footer" role="grid" aria-describedby="myTable_info" id="tableLeaveRemain">
+            <thead>
+                <tr>
+                    <th>NO.</th>
+                    <th>BALANCE LEAVE</th>
+                    <th>EMPLOYEE</th>
+                    <th>ACTION</th>
+                </tr>
+            </thead>
+            <tbody class="tbody"></tbody>
+        </table>
+    </div>
+</div>
+
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Calendar Form</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="Id" class="control-label">Id:</label>
+                        <input type="text" class="form-control" id="Id" placeholder="Id" disabled="disabled">
+                    </div>
+                    <div class="form-group">
+                        <label for="Duration" class="control-label">Duration:</label>
+                        <input type="number" class="form-control" min="0" max="12" id="Duration" placeholder="Please Insert Balance Leave between 0-12">
+                    </div>
+                    <div class="form-group">
+                        <label for="Employee_Id" class="control-label">Employee:</label>
+                        <input type="text" class="form-control" id="Employee_Id" placeholder="Employee">
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger waves-effect waves-light" id="Save" onclick="Validate();">Save</button>
+                <button type="button" class="btn btn-danger waves-effect waves-light" id="Update" style="display:none;" onclick="Validate();">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/Content/jquery/jquery.min.js"></script>
+    <script src="~/Content/assets/plugins/bootstrap/js/popper.min.js"></script>
+    <script src="~/Content/assets/plugins/bootstrap/js/bootstrap.js"></script>
+    <script src="~/Content/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="~/Content/assets/js/jquery.slimscroll.js"></script>
+    <script src="~/Content/assets/js/waves.js"></script>
+    <script src="~/Content/assets/js/sidebarmenu.js"></script>
+    <script src="~/Content/assets/plugins/sticky-kit-master/dist/sticky-kit.js"></script>
+    <script src="~/Content/assets/js/custom.min.js"></script>
+
+    <script src="~/Content/sweetalert/sweetalert.min.js"></script>
+    <link href="~/Content/sweetalert/sweetalert.css" rel="stylesheet" />
+    <script src="~/Content/datatables/jquery.dataTables.min.js"></script>
+    <link href="~/Content/datatables/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="~/Content/assets/js/moment.js"></script>
+    <script src="~/Content/assets/js/moment-with-locales.js"></script>
+    <script src="~/Scripts/Manager/LeaveRemain/LeaveRemainScript.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
