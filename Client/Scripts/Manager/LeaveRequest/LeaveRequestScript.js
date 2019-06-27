@@ -194,7 +194,7 @@ function ClearScreen() {
     $('#End_Date').val('');
     $('#Id').val('');
     $('#LeaveType_Id').val(0);
-    $('#Attachment').val('');
+    $('#Attachment').val('effwe');
     $('#Reason').val('');
     $('#Update').hide();
     $('#Save').show();

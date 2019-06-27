@@ -1,8 +1,18 @@
 ﻿
 @{
+    ViewBag.Title = "Leave Request";
     Layout = "~/Views/Shared/AdminLayout/_LayoutAdministrator.cshtml";
-    ViewBag.Title = "Index";
 }
+
+<div class="row page-titles">
+    <div class="col-md-6 col-8 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">Leave Request</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Leave Request</a></li>
+            <li class="breadcrumb-item active">List Leave Request</li>
+        </ol>
+    </div>
+</div>
 
 <div class="card">
     <div class="card-body">
@@ -76,10 +86,24 @@
                             <option>Choose</option>
                         </select>
                     </div>
+
                     <div class="form-group">
                         <label for="Attachment" class="control-label">Attachment:</label>
-                        <input type="text" class="form-control" id="Attachment" placeholder="Attachment" />
+                        <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                            <div class="form-control" data-trigger="fileinput">
+                                <i class="fa fa-file fileinput-exists"></i>
+                                <span class="fileinput-filename"></span>
+                            </div>
+                            <span class="input-group-addon btn btn-secondary btn-file">
+                                <span class="fileinput-new">Select file</span>
+                                <span class="fileinput-exists">Change</span>
+                                <input type="file" id="Attachment2"/>
+                            </span>
+                            <input type="text" id="Attachment"  style="display:none;"/>
+                            <a href="#" class="input-group-addon btn btn-secondary fileinput-exists" data-dismiss="fileinput">Remove</a>
+                        </div>
                     </div>
+
                     <div class="form-group">
                         <label for="Reason" class="control-label">Reason:</label>
                         <textarea type="text" rows="5" class="form-control" id="Reason" placeholder="Reason"></textarea>
@@ -111,6 +135,8 @@
     <script src="~/Content/assets/plugins/sticky-kit-master/dist/sticky-kit.js"></script>
     <script src="~/Content/assets/js/custom.min.js"></script>
 
+    <script src="~/Content/assets/js/jasny-bootstrap.js"></script>   
+
     <script src="~/Content/sweetalert/sweetalert.min.js"></script>>
     <link href="~/Content/sweetalert/sweetalert.css" rel="stylesheet" />
     <script src="~/Content/datatables/jquery.dataTables.min.js"></script>
@@ -129,6 +155,11 @@
                 autoclose: true,
                 todayHighlight: true
         });
+        });
+    </script>
+    <script>
+        $('#Attachment2').change(function () {
+            $('#Attachment').val($(this).val());
         });
     </script>
     <script>

@@ -350,6 +350,8 @@
     <Content Include="Content\assets\images\users\d3.jpg" />
     <Content Include="Content\assets\images\users\d4.jpg" />
     <Content Include="Content\assets\images\users\d5.jpg" />
+    <Content Include="Content\assets\images\users\raka.jpg" />
+    <Content Include="Content\assets\images\users\tes.jpg" />
     <Content Include="Content\assets\js\chat.js" />
     <Content Include="Content\assets\js\custom.js" />
     <Content Include="Content\assets\js\custom.min.js" />
