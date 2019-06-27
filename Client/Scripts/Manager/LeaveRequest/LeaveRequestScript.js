@@ -26,7 +26,8 @@ function LoadIndexLeaveRequest() {
                 html += '<td>' + val.Attachment + '</td>';
                 html += '<td>' + val.Reason + '</td>';
                 html += '<td>' + val.Status + '</td>';
-                html += '<td>' + '<Button href = "#" class="btn btn-info" onclick="return GetById(' + val.Id + ')"><i class="fa fa-pencil"></i></button>';
+                html += '<td>' + '<Button href = "#" class="btn btn-info" onclick="return GetById(' + val.Id + ')"><i class="fa fa-eye"></i></button>';
+                html += '<Button href = "#" class="btn btn-info" onclick="return GetById(' + val.Id + ')"><i class="fa fa-pencil"></i></button>';
                 html += ' <Button href="#" class="btn btn-danger" onclick="return Delete(' + val.Id + ')"><i class="fa fa-trash"></i></Button></td>';
                 html += '</tr>';
                 i++;
@@ -78,6 +79,7 @@ function Edit() {
     leaveRequest.Attachment = $('#Attachment').val();
     leaveRequest.Reason = $('#Reason').val();
     leaveRequest.Status = $('#Status').val();
+    debugger;
     $.ajax({
         url: "/LeaveRequests/InsertOrUpdate/",
         data: leaveRequest,
@@ -259,4 +261,14 @@ function Validate() {
     {
         Edit();
     }
+}
+
+function Reject() {
+    document.getElementById('Status').value = "Rejected";
+    Edit();
+}
+
+function Approve() {
+    document.getElementById('Status').value = "Approved";
+    Edit();
 }
