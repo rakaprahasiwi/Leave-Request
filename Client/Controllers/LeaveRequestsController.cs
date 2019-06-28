@@ -21,6 +21,11 @@ namespace Client.Controllers
             return View(LoadLeaveRequest());
         }
 
+        //public ActionResult IndexUser()
+        //{
+        //    return View(LoadLeaveRequest);
+        //}
+
         public JsonResult LoadLeaveRequest()
         {
             IEnumerable<LeaveRequest> leaveRequest = null;

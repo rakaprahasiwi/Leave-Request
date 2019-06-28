@@ -213,10 +213,11 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CalendarsController.cs" />
+    <Compile Include="Controllers\HistoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeaveRemainsController.cs" />
-    <Compile Include="Controllers\LeaveRequestGetAllsController.cs" />
     <Compile Include="Controllers\LeaveRequestsController.cs" />
+    <Compile Include="Controllers\LeaveRequestsEmployeesController.cs" />
     <Compile Include="Controllers\LeaveTypesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -4097,9 +4098,10 @@
     <Content Include="Content\assets\scss\variable.scss" />
     <Content Include="Content\assets\scss\widgets.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Employee\History\HistoryScript.js" />
+    <Content Include="Scripts\Employee\LeaveRequest\LeaveRequestScript.js" />
     <Content Include="Scripts\Manager\Calendar\CalendarScript.js" />
     <Content Include="Scripts\Manager\LeaveRemain\LeaveRemainScript.js" />
-    <Content Include="Scripts\Manager\LeaveRequest\LeaveRequestGetAllScript.js" />
     <Content Include="Scripts\Manager\LeaveRequest\LeaveRequestScript.js" />
     <Content Include="Scripts\Manager\LeaveTypes\LeaveTypesScript.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -4154,11 +4156,13 @@
     <Content Include="Views\Shared\UserLayout\_LayoutUser.cshtml" />
     <Content Include="Views\Calendars\Index.cshtml" />
     <Content Include="Views\LeaveRequests\Index.cshtml" />
-    <Content Include="Views\LeaveRequestGetAlls\Index.cshtml" />
+    <Content Include="Views\LeaveRequestsUser\Index.cshtml" />
+    <Content Include="Views\History\Index.cshtml" />
+    <Content Include="Views\LeaveRequests\IndexAT.cshtml" />
+    <Content Include="Views\LeaveRequestsEmployees\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\Employee\LeaveRequest\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

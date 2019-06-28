@@ -278,7 +278,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeaveRemainsController.cs" />
     <Compile Include="Controllers\LeaveRequestsController.cs" />
-    <Compile Include="Controllers\LeaveRequestGetAllsController.cs" />
+    <Compile Include="Controllers\LeaveRequestsEmployeesController.cs" />
     <Compile Include="Controllers\LeaveTypesController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">

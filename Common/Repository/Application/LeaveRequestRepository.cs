@@ -40,6 +40,12 @@ namespace Common.Repository.Application
             return get;
         }
 
+        public LeaveRequest GetEmployee()
+        {
+            var get = myContext.LeaveRequests.Include("LeaveType").SingleOrDefault(x => x.Employee_Id == 1);
+            return get;
+        }
+
         public List<LeaveRequest> GetSearch(string values)
         {
             var get = myContext.LeaveRequests.Include("LeaveType").Where

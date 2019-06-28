@@ -291,7 +291,7 @@ function Validate() {
     }
     else if ($('#Reason').val() == "" || $('#Reason').val() == " ")
     {
-        swal("Oops", "Expected Reaspn", "error")
+        swal("Oops", "Expected Reason", "error")
     }
     else if ($('#Id').val() == "" || $('#Id').val() == " ")
     {

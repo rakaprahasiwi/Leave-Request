@@ -1,0 +1,158 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/UserLayout/_LayoutUser.cshtml";
+}
+
+<div class="row page-titles">
+    <div class="col-md-6 col-8 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">Leave Request History</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Leave Request History</a></li>
+            <li class="breadcrumb-item active">Leave Request History</li>
+        </ol>
+    </div>
+</div>
+
+<div class="container">
+
+    <h4 class="modal-title">Leave Request Form</h4>
+</div>
+<div class="modal-body">
+    <form>
+        <div class="form-group" style="display:none;">
+            <label for="Id" class="control-label">Id</label>
+            <div class="input-group" style="display:none;">
+                <input type="text" class="form-control complex-colorpicker" id="Request_Date" placeholder="Insert date" disabled="disabled">
+                <span class="input-group-addon"><i class="icon-calender"></i></span>
+            </div>
+        </div>
+        <div class="form-group" style="display:none;">
+            <label for="Request_Date" class="control-label">Request Date:</label>
+            <div class="input-group ">
+                <input type="text" class="form-control complex-colorpicker" id="Request_Date" placeholder="Insert date" disabled="disabled">
+                <span class="input-group-addon"><i class="icon-calender"></i></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Start_Date" class="control-label">Start Date:</label>
+            <div class="input-group">
+                <input id="From_Datee" class="form-control complex-colorpicker" placeholder="Insert start date" type="text">
+                <span class="input-group-addon"><i class="icon-calender"></i></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="End_Date" class="control-label">End Date:</label>
+            <div class="input-group">
+                <input id="End_Datee" class="form-control complex-colorpicker" placeholder="Insert End date" type="text">
+                <span class="input-group-addon"><i class="icon-calender"></i></span>
+            </div>
+        </div>
+        <div class="form-group" style="display:none;">
+            <label for="Employee" class="control-label">Employee:</label>
+            <input type="text" class="form-control" id="Employee" disabled="disabled" />
+        </div>
+        <div class="form-group" style="display:none;">
+            <label for="Manager" class="control-label">Manager:</label>
+            <input type="text" class="form-control" id="Manager" disabled="disabled" />
+        </div>
+        <div class="form-group">
+            <label for="LeaveType_Id" class="control-label">Leave Type:</label>
+            <select class="custom-select col-12" id="LeaveType_Id">
+                <option>Choose</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="Attachment" class="control-label">Attachment:</label>
+            <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                <div class="form-control" data-trigger="fileinput">
+                    <i class="fa fa-file fileinput-exists"></i>
+                    <span class="fileinput-filename"></span>
+                </div>
+                <span class="input-group-addon btn btn-secondary btn-file">
+                    <span class="fileinput-new">Select file</span>
+                    <span class="fileinput-exists">Change</span>
+                    <input type="file" id="Attachment2" />
+                </span>
+                <input type="text" id="Attachment" style="display:none;" />
+                <a href="#" class="input-group-addon btn btn-secondary fileinput-exists" data-dismiss="fileinput">Remove</a>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="Reason" class="control-label">Reason:</label>
+            <textarea type="text" rows="5" class="form-control" id="Reason" placeholder="Reason"></textarea>
+        </div>
+        <div class="form-group" style="display:none;">
+            <label for="Status" class="control-label">Status:</label>
+            <input type="text" class="form-control" id="Status" disabled="disabled" />
+        </div>
+
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-danger waves-effect waves-light" id="Save" onclick="Validate();">Save</button>
+    <button type="button" class="btn btn-danger waves-effect waves-light" id="Update" style="display:none;" onclick="Validate();">Update</button>
+</div>
+
+@section Scripts{
+    <script src="~/Content/jquery/jquery.min.js"></script>
+    <script src="~/Content/assets/plugins/bootstrap/js/popper.min.js"></script>
+    <script src="~/Content/assets/plugins/bootstrap/js/bootstrap.js"></script>
+    <script src="~/Content/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="~/Content/assets/js/jquery.slimscroll.js"></script>
+    <script src="~/Content/assets/js/waves.js"></script>
+    <script src="~/Content/assets/js/sidebarmenu.js"></script>
+    <script src="~/Content/assets/plugins/sticky-kit-master/dist/sticky-kit.js"></script>
+    <script src="~/Content/assets/js/custom.min.js"></script>
+
+    <script src="~/Content/assets/js/jasny-bootstrap.js"></script>
+
+    <script src="~/Content/sweetalert/sweetalert.min.js"></script>>
+    <link href="~/Content/sweetalert/sweetalert.css" rel="stylesheet" />
+    <script src="~/Content/datatables/jquery.dataTables.min.js"></script>
+    <link href="~/Content/datatables/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="~/Content/datatables/dataTables.bootstrap.js"></script>
+    <script src="~/Content/assets/js/moment.js"></script>
+    <script src="~/Content/assets/js/moment-with-locales.js"></script>
+
+    <script src="~/Content/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <link href="~/Content/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <script type="text/javascript">
+        $(function () {
+            $(".datepicker").datepicker({
+                //beforeShowDay: $.datepicker.noWeekends,
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true
+            });
+        });
+    </script>
+    <script>
+        $('#Attachment2').change(function () {
+            $('#Attachment').val($(this).val());
+        });
+    </script>
+    <script>
+        jQuery('.complex-colorpicker').datepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            todayHighlight: true
+        });
+    </script>
+    <script type="text/javascript">
+        var date = new Date();
+        var Request_Date = date.toISOString().slice(0, 10);
+        document.getElementById('Request_Date').value = Request_Date;
+        document.getElementById('Employee').value = 2;
+        document.getElementById('Manager').value = 2;
+        document.getElementById('Status').value = "Submited";
+    </script>
+
+    <script src="~/Scripts/Manager/LeaveRequest/LeaveRequestScript.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

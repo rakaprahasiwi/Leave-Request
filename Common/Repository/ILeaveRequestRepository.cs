@@ -13,6 +13,7 @@ namespace Common.Repository
         List<LeaveRequest> Get();
         List<LeaveRequest> GetSearch(string values);
         LeaveRequest Get(int id);
+        LeaveRequest GetEmployee();
         bool Insert(LeaveRequestVM leaveRequestVM);
         bool Update(int id, LeaveRequestVM leaveRequestVM);
         bool Delete(int id);
