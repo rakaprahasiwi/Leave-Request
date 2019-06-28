@@ -16,7 +16,7 @@
 
 <div class="card">
     <div class="card-body">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="ClearScreen();">Create New</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="ClearScreen();" style="display:none;">Create New</button>
         <table class="table table-bordered table-striped dataTable no-footer table-responsive" role="grid" aria-describedby="myTable_info" id="tableLeaveRequest">
             <thead>
                 <tr>
@@ -108,13 +108,13 @@
                         <label for="Reason" class="control-label">Reason:</label>
                         <textarea type="text" rows="5" class="form-control" id="Reason" placeholder="Reason"></textarea>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" style="display:none;">
                         <label for="Status" class="control-label">Status:</label>
                         <input type="text" class="form-control" id="Status" disabled="disabled" />
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" style="display:none;">
                         <label for="Status" class="control-label">Duration:</label>
-                        <input type="text" class="form-control" id="Duration" disabled="disabled" />
+                        <input type="text" class="form-control" id="Duration"  disabled="disabled" />
                     </div>
 
                 </form>
