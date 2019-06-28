@@ -20,7 +20,11 @@ namespace Client.Controllers
         {
             return View(LoadLeaveRequest());
         }
-
+        
+        public ActionResult IndexUser()
+        {
+            return View();
+        }
         //public ActionResult IndexUser()
         //{
         //    return View(LoadLeaveRequest);

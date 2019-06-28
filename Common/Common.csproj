@@ -57,11 +57,13 @@
     <Compile Include="Repository\Application\CalendarRepository.cs" />
     <Compile Include="Repository\Application\LeaveRemainRepository.cs" />
     <Compile Include="Repository\Application\LeaveRequestEmployeeRepository.cs" />
+    <Compile Include="Repository\Application\LeaveRequestGetAllRepository.cs" />
     <Compile Include="Repository\Application\LeaveRequestRepository.cs" />
     <Compile Include="Repository\Application\LeaveTypeRepository.cs" />
     <Compile Include="Repository\ICalendarRepository.cs" />
     <Compile Include="Repository\ILeaveRemainRepository.cs" />
     <Compile Include="Repository\ILeaveRequestEmployeeRepository.cs" />
+    <Compile Include="Repository\ILeaveRequestGetAllRepository.cs" />
     <Compile Include="Repository\ILeaveRequestRepository.cs" />
     <Compile Include="Repository\ILeaveTypeRepository.cs" />
   </ItemGroup>

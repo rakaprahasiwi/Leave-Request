@@ -9,6 +9,6 @@ namespace BusinessLogic.Service
 {
     public interface ILeaveRequestEmployeeService
     {
-        LeaveRequest GetEmployee();
+        List<LeaveRequest> GetEmployee();
     }
 }

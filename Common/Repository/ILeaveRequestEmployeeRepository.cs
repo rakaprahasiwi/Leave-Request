@@ -9,6 +9,6 @@ namespace Common.Repository
 {
     public interface ILeaveRequestEmployeeRepository
     {
-        LeaveRequest GetEmployee();
+        List<LeaveRequest> GetEmployee();
     }
 }

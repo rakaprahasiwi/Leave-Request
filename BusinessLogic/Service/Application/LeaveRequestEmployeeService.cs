@@ -18,7 +18,7 @@ namespace BusinessLogic.Service.Application
             iLeaveRequestEmployeeRepository = _iLeaveRequestEmployeeRepository;
         }
 
-        public LeaveRequest GetEmployee()
+        public List<LeaveRequest> GetEmployee()
         {
             return iLeaveRequestEmployeeRepository.GetEmployee();
         }

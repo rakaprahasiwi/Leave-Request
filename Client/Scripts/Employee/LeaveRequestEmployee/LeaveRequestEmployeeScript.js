@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
     LoadIndexLeaveRequest();
-    $('#tableLeaveRequest').DataTable({
+    $('#tableLeaveRequestEmployee').DataTable({
         "ajax": LoadIndexLeaveRequest()
     })
 })
@@ -26,9 +26,6 @@ function LoadIndexLeaveRequest() {
                 html += '<td>' + val.Attachment + '</td>';
                 html += '<td>' + val.Reason + '</td>';
                 html += '<td>' + val.Status + '</td>';
-                html += '<td>' + '<Button href = "#" class="btn btn-info" onclick="return GetById(' + val.Id + ')"><i class="fa fa-eye"></i></button>';
-                html += '<Button href = "#" class="btn btn-info" onclick="return GetById(' + val.Id + ')"><i class="fa fa-pencil"></i></button>';
-                html += ' <Button href="#" class="btn btn-danger" onclick="return Delete(' + val.Id + ')"><i class="fa fa-trash"></i></Button></td>';
                 html += '</tr>';
                 i++;
             });

@@ -48,96 +48,15 @@ namespace API.Controllers
         }
 
         // GET: api/LeaveRequestsEmployees/5
-        [ResponseType(typeof(LeaveRequest))]
-        public IHttpActionResult GetLeaveRequest(int id)
-        {
-            LeaveRequest leaveRequest = db.LeaveRequests.Find(id);
-            if (leaveRequest == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(leaveRequest);
-        }
+        
 
         // PUT: api/LeaveRequestsEmployees/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutLeaveRequest(int id, LeaveRequest leaveRequest)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != leaveRequest.Id)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(leaveRequest).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!LeaveRequestExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
+        
 
         // POST: api/LeaveRequestsEmployees
-        [ResponseType(typeof(LeaveRequest))]
-        public IHttpActionResult PostLeaveRequest(LeaveRequest leaveRequest)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.LeaveRequests.Add(leaveRequest);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = leaveRequest.Id }, leaveRequest);
-        }
+        
 
         // DELETE: api/LeaveRequestsEmployees/5
-        [ResponseType(typeof(LeaveRequest))]
-        public IHttpActionResult DeleteLeaveRequest(int id)
-        {
-            LeaveRequest leaveRequest = db.LeaveRequests.Find(id);
-            if (leaveRequest == null)
-            {
-                return NotFound();
-            }
-
-            db.LeaveRequests.Remove(leaveRequest);
-            db.SaveChanges();
-
-            return Ok(leaveRequest);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool LeaveRequestExists(int id)
-        {
-            return db.LeaveRequests.Count(e => e.Id == id) > 0;
-        }
+        
     }
 }

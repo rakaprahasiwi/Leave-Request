@@ -277,6 +277,7 @@
     <Compile Include="Controllers\CalendarsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeaveRemainsController.cs" />
+    <Compile Include="Controllers\LeaveRequestGetAllsController.cs" />
     <Compile Include="Controllers\LeaveRequestsController.cs" />
     <Compile Include="Controllers\LeaveRequestsEmployeesController.cs" />
     <Compile Include="Controllers\LeaveTypesController.cs" />

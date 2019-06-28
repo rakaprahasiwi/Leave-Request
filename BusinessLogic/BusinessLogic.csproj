@@ -57,11 +57,13 @@
     <Compile Include="Service\Application\CalendarService.cs" />
     <Compile Include="Service\Application\LeaveRemainService.cs" />
     <Compile Include="Service\Application\LeaveRequestEmployeeService.cs" />
+    <Compile Include="Service\Application\LeaveRequestGetAllService.cs" />
     <Compile Include="Service\Application\LeaveRequestService.cs" />
     <Compile Include="Service\Application\LeaveTypeService.cs" />
     <Compile Include="Service\ICalendarService.cs" />
     <Compile Include="Service\ILeaveRemainService.cs" />
     <Compile Include="Service\ILeaveRequestEmployeeService.cs" />
+    <Compile Include="Service\ILeaveRequestGetAllService.cs" />
     <Compile Include="Service\ILeaveRequestService.cs" />
     <Compile Include="Service\ILeaveTypeService.cs" />
   </ItemGroup>

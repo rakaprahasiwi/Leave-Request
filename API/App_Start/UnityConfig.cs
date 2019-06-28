@@ -25,6 +25,7 @@ namespace API
             container.RegisterType<ILeaveRequestGetAllRepository, LeaveRequestGetAllRepository>();
             container.RegisterType<ILeaveTypeRepository, LeaveTypeRepository>();
             container.RegisterType<ICalendarRepository, CalendarRepository>();
+            container.RegisterType<ILeaveRequestEmployeeRepository, LeaveRequestEmployeeRepository>();
 
             //this is for service
             container.RegisterType<ILeaveRemainService, LeaveRemainService>();
@@ -32,6 +33,7 @@ namespace API
             container.RegisterType<ILeaveRequestGetAllService, LeaveRequestGetAllService>();
             container.RegisterType<ILeaveTypeService, LeaveTypeService>();
             container.RegisterType<ICalendarService, CalendarService>();
+            container.RegisterType<ILeaveRequestEmployeeService, LeaveRequestEmployeeService>();
 
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }
