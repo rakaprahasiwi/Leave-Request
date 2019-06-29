@@ -443,13 +443,14 @@ namespace Client.Controllers
             }
         }
 
+        //login
         private ActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Dashboards");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace Client.Controllers
 {
+    [Authorize]
     public class LeaveRemainsController : Controller
     {
         BaseLink get = new BaseLink();

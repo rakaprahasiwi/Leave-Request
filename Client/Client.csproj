@@ -213,6 +213,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CalendarsController.cs" />
+    <Compile Include="Controllers\DashboardsController.cs" />
     <Compile Include="Controllers\HistoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeaveRemainsController.cs" />
@@ -4101,7 +4102,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Employee\History\HistoryScript.js" />
     <Content Include="Scripts\Employee\LeaveRequestEmployee\LeaveRequestEmployeeScript.js" />
-    <Content Include="Scripts\Employee\LeaveRequest\LeaveRequestScript.js" />
+    <Content Include="Scripts\Employee\LeaveRequest\LeaveRequest1Script.js" />
     <Content Include="Scripts\Manager\Calendar\CalendarScript.js" />
     <Content Include="Scripts\Manager\LeaveRemain\LeaveRemainScript.js" />
     <Content Include="Scripts\Manager\LeaveRequest\LeaveRequestGetAllScript.js" />
@@ -4163,6 +4164,7 @@
     <Content Include="Views\History\Index.cshtml" />
     <Content Include="Views\LeaveRequestsEmployees\Index.cshtml" />
     <Content Include="Views\LeaveRequestGetAlls\Index.cshtml" />
+    <Content Include="Views\Dashboards\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

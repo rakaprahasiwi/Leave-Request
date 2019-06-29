@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace Client.Controllers
 {
+    [Authorize]
     public class LeaveRequestsController : Controller
     {
         BaseLink get = new BaseLink();
@@ -23,7 +24,7 @@ namespace Client.Controllers
         
         public ActionResult IndexUser()
         {
-            return View();
+            return View(LoadLeaveRequest());
         }
         //public ActionResult IndexUser()
         //{

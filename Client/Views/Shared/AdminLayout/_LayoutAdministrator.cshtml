@@ -51,6 +51,7 @@
             <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
         </svg>
     </div>
+    
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
@@ -190,7 +191,7 @@
                                     <li role="separator" class="divider"></li>
                                     <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
                                     <li role="separator" class="divider"></li>
-                                    <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
+                                    <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-power-off"></i> Logout</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -224,52 +225,82 @@
                                 <a href="#" class="dropdown-item"><i class="ti-wallet"></i> My Balance</a>
                                 <a href="#" class="dropdown-item"><i class="ti-email"></i> Inbox</a>
                                 <div class="dropdown-divider"></div> <a href="#" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
-                                <div class="dropdown-divider"></div> <a href="login.html" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
+                                <div class="dropdown-divider"></div> <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
                             </div>
                         </div>
                     </div>
                     <!-- End User profile text-->
                     <!-- Sidebar navigation-->
-                    <nav class="sidebar-nav active">
-                        <ul id="sidebarnav" class="in">
-                            <li class="nav-small-cap">OPTIONS</li>
-                            <li>
-                                <a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-calendar"></i><span class="hide-menu">Calendar</span></a>
-                                <ul aria-expanded="false" class="collapse">
-                                    <li>@Html.ActionLink("List Calendar", "Index", "Calendars")</li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-book-plus"></i><span class="hide-menu">Leave Request</span></a>
-                                <ul aria-expanded="false" class="collapse">
-                                    <li>@Html.ActionLink("List Leave Request", "Index", "LeaveRequests")</li>
-                                    <li>@Html.ActionLink("List History Leave Request", "Index", "LeaveRequestGetAlls")</li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">Leave Type</span></a>
-                                <ul aria-expanded="false" class="collapse">
-                                    <li>@Html.ActionLink("List Leave Type", "Index", "LeaveTypes")</li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-face-profile"></i><span class="hide-menu">Leave Remain</span></a>
-                                <ul aria-expanded="false" class="collapse">
-                                    <li>@Html.ActionLink("List Leave Remain", "Index", "LeaveRemains")</li>
-                                </ul>
-                            </li>
-                            <li class="nav-devider"></li>
-                            
-                            
-                            
-                            
-                                    
-                             
-                            
-                            
-                            
-                        </ul>
-                    </nav>
+
+                    @if (User.IsInRole("admin"))
+                    {
+                        <nav class="sidebar-nav active">
+                            <ul id="sidebarnav" class="in">
+                                <li class="nav-small-cap">OPTIONS</li>
+                                <li>
+                                    <a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-calendar"></i><span class="hide-menu">Calendar</span></a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li>@Html.ActionLink("Dashboard", "Index", "Dashboards")</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-calendar"></i><span class="hide-menu">Calendar</span></a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li>@Html.ActionLink("List Calendar", "Index", "Calendars")</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-book-plus"></i><span class="hide-menu">Leave Request</span></a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li>@Html.ActionLink("List Leave Request", "Index", "LeaveRequests")</li>
+                                        <li>@Html.ActionLink("List History Leave Request", "Index", "LeaveRequestGetAlls")</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">Leave Type</span></a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li>@Html.ActionLink("List Leave Type", "Index", "LeaveTypes")</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-face-profile"></i><span class="hide-menu">Leave Remain</span></a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li>@Html.ActionLink("List Leave Remain", "Index", "LeaveRemains")</li>
+                                    </ul>
+                                </li>
+                                <li class="nav-devider"></li>
+                            </ul>
+                        </nav>
+                    }
+                    else
+                    {
+                        <nav class="sidebar-nav active">
+                            <ul id="sidebarnav" class="in">
+                                <li class="nav-small-cap">OPTIONS</li>
+                                <li>
+                                    <a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-calendar"></i><span class="hide-menu">Calendar</span></a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li>@Html.ActionLink("Dashboard", "Index", "Dashboards")</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-book-plus"></i><span class="hide-menu">Leave Request Form</span></a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li>@Html.ActionLink("Create New Form", "Index", "LeaveRequests/indexUser")</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-history"></i><span class="hide-menu">History</span></a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li>@Html.ActionLink("Leave Request History", "Index", "LeaveRequestsEmployees")</li>
+                                    </ul>
+                                </li>
+                                <li class="nav-devider"></li>
+                            </ul>
+                        </nav>
+                    }
+
+                    
                     <!-- End Sidebar navigation -->
                 </div><div class="slimScrollBar" style="background: rgb(220, 220, 220); width: 5px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; left: 1px; height: 64.3392px;"></div><div class="slimScrollRail" style="width: 5px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; left: 1px;"></div>
             
@@ -281,7 +312,7 @@
                 <!-- item-->
                 <a href="" class="link" data-toggle="tooltip" title="" data-original-title="Email"><i class="mdi mdi-gmail"></i></a>
                 <!-- item-->
-                <a href="" class="link" data-toggle="tooltip" title="" data-original-title="Logout"><i class="mdi mdi-power"></i></a>
+                <a href="javascript:document.getElementById('logoutForm').submit()" class="link" data-toggle="tooltip" title="" data-original-title="Logout"><i class="mdi mdi-power"></i></a>
             </div>
             <!-- End Bottom points-->
         </aside>
@@ -432,5 +463,14 @@
     <!-- ============================================================== -->
     <script src="~/Content/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
     @RenderSection("scripts", required: false)
+
+    @if (Request.IsAuthenticated)
+    {
+        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+        {
+            @Html.AntiForgeryToken()
+
+        }
+    }
 </body>
 </html>

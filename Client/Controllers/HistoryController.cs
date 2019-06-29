@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace Client.Controllers
 {
+
     public class HistoryController : Controller
     {
         BaseLink get = new BaseLink();

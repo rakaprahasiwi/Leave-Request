@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace Client.Controllers
 {
+    [Authorize]
     public class CalendarsController : Controller
     {
         BaseLink get = new BaseLink();

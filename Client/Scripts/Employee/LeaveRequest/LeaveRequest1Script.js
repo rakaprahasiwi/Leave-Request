@@ -30,6 +30,7 @@ function LoadIndexLeaveRequest() {
                 html += ' <Button href="#" class="btn btn-danger" onclick="return Delete(' + val.Id + ')"><i class="fa fa-trash"></i></Button></td>';
                 html += '</tr>';
                 i++;
+                debugger;
             });
             $('.tbody').html(html);
         }
@@ -83,7 +84,7 @@ function Save() {
                 type: "success"
             },
             function () {
-                window.location.href = '/LeaveRequests/Index/';
+                window.location.href = '/LeaveRequests/IndexUser/';
             });
             LoadIndexLeaveRequest();
             $('#myModal').modal('hide');
@@ -95,6 +96,7 @@ function Save() {
 function Edit() {
     var leaveRequest = new Object();
     leaveRequest.id = $('#Id').val();
+    debugger;
     leaveRequest.Request_Date = $('#Request_Date').val();
     leaveRequest.from_Date = $('#From_Datee').val();
     leaveRequest.end_Date = $('#End_Datee').val();
@@ -115,7 +117,7 @@ function Edit() {
                 type: "success"
             },
             function () {
-                window.location.href = '/LeaveRequests/Index/';
+                window.location.href = '/LeaveRequests/IndexUser/';
             });
             LoadIndexLeaveRequest();
             $('#myModal').modal('hide');
@@ -220,7 +222,7 @@ function Delete(Id) {
                     type: "success"
                 },
                     function () {
-                        window.location.href = '/LeaveRequests/Index/';
+                        window.location.href = '/LeaveRequests/IndexUser/';
                     });
             },
             error: function (response) {
@@ -354,7 +356,7 @@ function ConfirmReject() {
                 type: "success"
             },
             function () {
-                window.location.href = '/LeaveRequests/Index/';
+                window.location.href = '/LeaveRequests/IndexUser/';
             });
             DeleteConfirm(leaveRequest.id);
             LoadIndexLeaveRequest();
@@ -387,7 +389,7 @@ function ConfirmApprove() {
                 type: "success"
             },
             function () {
-                window.location.href = '/LeaveRequests/Index/';
+                window.location.href = '/LeaveRequests/IndexUser/';
             });
             DeleteConfirm(leaveRequest.id);
             LoadIndexLeaveRequest();
@@ -402,7 +404,7 @@ function DeleteConfirm(Id) {
         url: "/LeaveRequests/Delete/",
         data: { id: Id },
         success: function (response) {
-            window.location.href = '/LeaveRequests/Index/';
+            window.location.href = '/LeaveRequests/IndexUser/';
         },
         error: function (response) {
             swal("Oops", "We couldn't connect to the server!", "error");
