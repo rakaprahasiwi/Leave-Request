@@ -1,9 +1,9 @@
 ﻿
+
 @{
-    ViewBag.Title = "Leave Request";
+    ViewBag.Title = "Leave Request User";
     Layout = "~/Views/Shared/AdminLayout/_LayoutAdministrator.cshtml";
 }
-
 <div class="row page-titles">
     <div class="col-md-6 col-8 align-self-center">
         <h3 class="text-themecolor m-b-0 m-t-0">Leave Request</h3>
@@ -16,7 +16,7 @@
 
 <div class="card">
     <div class="card-body">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="ClearScreen();" style="display:none;">Create New</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="ClearScreen();">Create New</button><br/><br/>
         <table class="table table-bordered table-striped dataTable no-footer table-responsive" role="grid" aria-describedby="myTable_info" id="tableLeaveRequest">
             <thead>
                 <tr>
@@ -97,7 +97,7 @@
                             <span class="input-group-addon btn btn-secondary btn-file">
                                 <span class="fileinput-new">Select file</span>
                                 <span class="fileinput-exists">Change</span>
-                                <input type="file" id="Attachment2"/>
+                                <input type="file" id="Attachment2" />
                             </span>
                             <a href="#" class="input-group-addon btn btn-secondary fileinput-exists" data-dismiss="fileinput">Remove</a>
                         </div>
@@ -114,7 +114,7 @@
                     </div>
                     <div class="form-group" style="display:none;">
                         <label for="Status" class="control-label">Duration:</label>
-                        <input type="text" class="form-control" id="Duration"  disabled="disabled" />
+                        <input type="text" class="form-control" id="Duration" disabled="disabled" />
                     </div>
 
                 </form>
@@ -132,7 +132,7 @@
 
 @section Scripts{
     <script src="~/Content/jquery/jquery.min.js"></script>
-<script src="~/Content/assets/plugins/bootstrap/js/popper.min.js"></script>
+    <script src="~/Content/assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="~/Content/assets/plugins/bootstrap/js/bootstrap.js"></script>
     <script src="~/Content/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
@@ -142,7 +142,7 @@
     <script src="~/Content/assets/plugins/sticky-kit-master/dist/sticky-kit.js"></script>
     <script src="~/Content/assets/js/custom.min.js"></script>
 
-    <script src="~/Content/assets/js/jasny-bootstrap.js"></script>   
+    <script src="~/Content/assets/js/jasny-bootstrap.js"></script>
 
     <script src="~/Content/sweetalert/sweetalert.min.js"></script>>
     <link href="~/Content/sweetalert/sweetalert.css" rel="stylesheet" />
@@ -184,7 +184,8 @@
         document.getElementById('Manager').value = 2;
         document.getElementById('Status').value = "Submited";
     </script>
-
-    <script src="~/Scripts/Manager/LeaveRequest/LeaveRequestScript.js"></script>
+    <script src="~/Scripts/Employee/LeaveRequest/LeaveRequest1Script.js"></script>
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+

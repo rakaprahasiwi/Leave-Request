@@ -26,11 +26,11 @@ function LoadIndexLeaveRequest() {
                 html += '<td>' + val.Attachment + '</td>';
                 html += '<td>' + val.Reason + '</td>';
                 html += '<td>' + val.Status + '</td>';
-                html += '<td>' + '<Button href = "#" class="btn btn-secondary" onclick="return GetByIdAct(' + val.Id + ')"><i class="mdi mdi-eye"></i></button>';
-                html += ' <Button href = "#" class="btn btn-info" onclick="return GetById(' + val.Id + ')"><i class="fa fa-pencil"></i></button>';
+                html += '<td>' + ' <Button href = "#" class="btn btn-info" onclick="return GetById(' + val.Id + ')"><i class="fa fa-pencil"></i></button>';
                 html += ' <Button href="#" class="btn btn-danger" onclick="return Delete(' + val.Id + ')"><i class="fa fa-trash"></i></Button></td>';
                 html += '</tr>';
                 i++;
+                debugger;
             });
             $('.tbody').html(html);
         }
@@ -84,7 +84,7 @@ function Save() {
                 type: "success"
             },
             function () {
-                window.location.href = '/LeaveRequests/Index/';
+                window.location.href = '/LeaveRequests/IndexUser/';
             });
             LoadIndexLeaveRequest();
             $('#myModal').modal('hide');
@@ -96,6 +96,7 @@ function Save() {
 function Edit() {
     var leaveRequest = new Object();
     leaveRequest.id = $('#Id').val();
+    debugger;
     leaveRequest.Request_Date = $('#Request_Date').val();
     leaveRequest.from_Date = $('#From_Datee').val();
     leaveRequest.end_Date = $('#End_Datee').val();
@@ -116,7 +117,7 @@ function Edit() {
                 type: "success"
             },
             function () {
-                window.location.href = '/LeaveRequests/Index/';
+                window.location.href = '/LeaveRequests/IndexUser/';
             });
             LoadIndexLeaveRequest();
             $('#myModal').modal('hide');
@@ -142,7 +143,7 @@ function GetById(Id) {
             $('#Attachment').val(result.Attachment);
             $('#Reason').val(result.Reason);
             $('#Status').val(result.Status);
-            
+
             $('#myModal').modal('show');
             $('#Choose').show();
             $('#Attachment').hide();
@@ -221,7 +222,7 @@ function Delete(Id) {
                     type: "success"
                 },
                     function () {
-                        window.location.href = '/LeaveRequests/Index/';
+                        window.location.href = '/LeaveRequests/IndexUser/';
                     });
             },
             error: function (response) {
@@ -273,32 +274,25 @@ $('#Save').show();
 ClearScreen();
 
 function Validate() {
-    if ($('#From_Date').val() == "" || $('#From_Date').val() == " ")
-    {
+    if ($('#From_Date').val() == "" || $('#From_Date').val() == " ") {
         swal("Oops", "Please Insert Start Date", "error")
-    } 
-    else if ($('#End_Date').val() == "" || $('#End_Date').val() == " ")
-    {
+    }
+    else if ($('#End_Date').val() == "" || $('#End_Date').val() == " ") {
         swal("Oops", "Please Insert End Date", "error")
-    } 
-    else if ($('#LeaveType_Id').val() == 0 || $('#LeaveType_Id').val() == "Select Leave Type")
-    {
+    }
+    else if ($('#LeaveType_Id').val() == 0 || $('#LeaveType_Id').val() == "Select Leave Type") {
         swal("Oops", "Expected Leave Type", "error")
-    } 
-    else if ($('#Attachment').val() == "" || $('#Attachment').val() == " ")
-    {
+    }
+    else if ($('#Attachment').val() == "" || $('#Attachment').val() == " ") {
         swal("Oops", "Expected Note", "error")
     }
-    else if ($('#Reason').val() == "" || $('#Reason').val() == " ")
-    {
+    else if ($('#Reason').val() == "" || $('#Reason').val() == " ") {
         swal("Oops", "Expected Reason", "error")
     }
-    else if ($('#Id').val() == "" || $('#Id').val() == " ")
-    {
+    else if ($('#Id').val() == "" || $('#Id').val() == " ") {
         Save();
     }
-    else
-    {
+    else {
         Edit();
     }
 }
@@ -334,7 +328,7 @@ function ConfirmReject() {
         dataType: "json",
         data: { id: leaveRequest.Employee_Id },
         success: function (result) {
-            var dur = result.Duration - ((-1)*leaveRequest.duration);
+            var dur = result.Duration - ((-1) * leaveRequest.duration);
             //var min = dur + leaveRequest.duration;
             debugger;
             var remain = new Object();
@@ -362,7 +356,7 @@ function ConfirmReject() {
                 type: "success"
             },
             function () {
-                window.location.href = '/LeaveRequests/Index/';
+                window.location.href = '/LeaveRequests/IndexUser/';
             });
             DeleteConfirm(leaveRequest.id);
             LoadIndexLeaveRequest();
@@ -395,7 +389,7 @@ function ConfirmApprove() {
                 type: "success"
             },
             function () {
-                window.location.href = '/LeaveRequests/Index/';
+                window.location.href = '/LeaveRequests/IndexUser/';
             });
             DeleteConfirm(leaveRequest.id);
             LoadIndexLeaveRequest();
@@ -410,7 +404,7 @@ function DeleteConfirm(Id) {
         url: "/LeaveRequests/Delete/",
         data: { id: Id },
         success: function (response) {
-            window.location.href = '/LeaveRequests/Index/';  
+            window.location.href = '/LeaveRequests/IndexUser/';
         },
         error: function (response) {
             swal("Oops", "We couldn't connect to the server!", "error");
@@ -424,7 +418,7 @@ function resultDate() {
     var separate_start_date = start_date.split('-');
     var separate_end_date = end_date.split('-');
     var object_date = new Date();
-    
+
     var date_start_leave = object_date.setFullYear(separate_start_date[0], separate_start_date[1], separate_start_date[2]);
     var date_end_leave = object_date.setFullYear(separate_end_date[0], separate_end_date[1], separate_end_date[2]);
     var result = (date_end_leave - date_start_leave) / (60 * 60 * 24 * 1000);

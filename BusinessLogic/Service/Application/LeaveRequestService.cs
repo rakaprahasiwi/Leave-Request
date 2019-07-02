@@ -41,6 +41,11 @@ namespace BusinessLogic.Service.Application
             return iLeaveRequestRepository.Get(id);
         }
 
+        public LeaveRequest GetEmployee()
+        {
+            return iLeaveRequestRepository.GetEmployee();
+        }
+
         public List<LeaveRequest> GetSearch(string values)
         {
             return iLeaveRequestRepository.GetSearch(values);

@@ -1,44 +1,34 @@
 ﻿using Core.Base;
 using DataAccess.Models;
 using DataAccess.ViewModels;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Web;
 using System.Web.Mvc;
 
 namespace Client.Controllers
 {
     [Authorize]
-    public class LeaveRequestsController : Controller
+    public class LeaveRequestGetAllsController : Controller
     {
         BaseLink get = new BaseLink();
-        // GET: LeaveRequests
+
+        // GET: LeaveRequestGetAlls
         public ActionResult Index()
         {
-            return View(LoadLeaveRequest());
+            return View(LoadLeaveRequestGetAll());
         }
-        
-        public ActionResult IndexUser()
-        {
-            return View(LoadLeaveRequest());
-        }
-        //public ActionResult IndexUser()
-        //{
-        //    return View(LoadLeaveRequest);
-        //}
 
-        public JsonResult LoadLeaveRequest()
+        public JsonResult LoadLeaveRequestGetAll()
         {
             IEnumerable<LeaveRequest> leaveRequest = null;
             var client = new HttpClient
             {
                 BaseAddress = new Uri(get.link)
             };
-            var responseTask = client.GetAsync("LeaveRequests");
+            var responseTask = client.GetAsync("LeaveRequestGetAlls");
             responseTask.Wait();
             var result = responseTask.Result;
             if (result.IsSuccessStatusCode)
@@ -55,24 +45,6 @@ namespace Client.Controllers
             return Json(leaveRequest, JsonRequestBehavior.AllowGet);
         }
 
-        public void InsertOrUpdate(LeaveRequestVM leaveRequestVM)
-        {
-            var client = new HttpClient();
-            client.BaseAddress = new Uri(get.link);
-            var myContent = JsonConvert.SerializeObject(leaveRequestVM);
-            var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
-            var byteContent = new ByteArrayContent(buffer);
-            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            if (leaveRequestVM.Id.Equals(0))
-            {
-                var result = client.PostAsync("LeaveRequests", byteContent).Result;
-            }
-            else
-            {
-                var result = client.PutAsync("LeaveRequests/" + leaveRequestVM.Id, byteContent).Result;
-            }
-        }
-
         public JsonResult GetById(int id)
         {
             LeaveRequestVM leaveRequestVM = null;
@@ -80,7 +52,7 @@ namespace Client.Controllers
             {
                 BaseAddress = new Uri(get.link)
             };
-            var responseTask = client.GetAsync("LeaveRequests/" + id);
+            var responseTask = client.GetAsync("LeaveRequestGetAlls/" + id);
             responseTask.Wait();
             var result = responseTask.Result;
             if (result.IsSuccessStatusCode)
@@ -102,7 +74,7 @@ namespace Client.Controllers
             {
                 BaseAddress = new Uri(get.link)
             };
-            var result = client.DeleteAsync("LeaveRequests/" + id).Result;
+            var result = client.DeleteAsync("LeaveRequestGetAlls/" + id).Result;
         }
     }
 }
